@@ -1,0 +1,206 @@
+{
+    "lipsticks": [
+        {
+            "id": "lip-1",
+            "brand": "Luxe Beauty",
+            "name": "Velvet Matte",
+            "shade": "Rose Petal",
+            "color": "#D4869C",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-2",
+            "brand": "Luxe Beauty",
+            "name": "Velvet Matte",
+            "shade": "Coral Dream",
+            "color": "#E8927C",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-3",
+            "brand": "Glow Cosmetics",
+            "name": "Satin Finish",
+            "shade": "Berry Kiss",
+            "color": "#A8516E",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-4",
+            "brand": "Glow Cosmetics",
+            "name": "Satin Finish",
+            "shade": "Terracotta",
+            "color": "#C67B5C",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-5",
+            "brand": "Radiant Rouge",
+            "name": "Glossy Shine",
+            "shade": "Plum Perfection",
+            "color": "#6B3E5C",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-6",
+            "brand": "Radiant Rouge",
+            "name": "Glossy Shine",
+            "shade": "Brick Red",
+            "color": "#8B4234",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-7",
+            "brand": "Pure Pout",
+            "name": "Cream Lipstick",
+            "shade": "Nude Blush",
+            "color": "#C9A0A0",
+            "depth": "light",
+            "undertone": "neutral"
+        },
+        {
+            "id": "lip-8",
+            "brand": "Pure Pout",
+            "name": "Cream Lipstick",
+            "shade": "Mauve Magic",
+            "color": "#9B6B7F",
+            "depth": "medium",
+            "undertone": "neutral"
+        },
+        {
+            "id": "lip-9",
+            "brand": "Chic Lips",
+            "name": "Liquid Matte",
+            "shade": "Wine Night",
+            "color": "#5C2E3E",
+            "depth": "deep",
+            "undertone": "neutral"
+        },
+        {
+            "id": "lip-10",
+            "brand": "Chic Lips",
+            "name": "Liquid Matte",
+            "shade": "Pink Champagne",
+            "color": "#E5B3C5",
+            "depth": "light",
+            "undertone": "cool"
+        }
+    ],
+    "blushes": [
+        {
+            "id": "blush-1",
+            "brand": "Radiance Co",
+            "name": "Powder Blush",
+            "shade": "Soft Pink",
+            "color": "#F5A9B8",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-2",
+            "brand": "Radiance Co",
+            "name": "Powder Blush",
+            "shade": "Peachy Keen",
+            "color": "#FFAB91",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-3",
+            "brand": "Glow Up",
+            "name": "Cream Blush",
+            "shade": "Rosy Glow",
+            "color": "#E57373",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-4",
+            "brand": "Glow Up",
+            "name": "Cream Blush",
+            "shade": "Warm Sunset",
+            "color": "#FF8A65",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-5",
+            "brand": "Blush Beauty",
+            "name": "Liquid Blush",
+            "shade": "Deep Rose",
+            "color": "#C2185B",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-6",
+            "brand": "Blush Beauty",
+            "name": "Liquid Blush",
+            "shade": "Terracotta Glow",
+            "color": "#D84315",
+            "depth": "deep",
+            "undertone": "warm"
+        }
+    ],
+    "eyeshadows": [
+        {
+            "id": "eye-1",
+            "brand": "Eye Artistry",
+            "name": "Shimmer Shadow",
+            "shade": "Champagne",
+            "color": "#E8D4B8",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-2",
+            "brand": "Eye Artistry",
+            "name": "Shimmer Shadow",
+            "shade": "Silver Frost",
+            "color": "#C0C0C0",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-3",
+            "brand": "Shadow Studio",
+            "name": "Matte Palette",
+            "shade": "Bronze",
+            "color": "#CD7F32",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-4",
+            "brand": "Shadow Studio",
+            "name": "Matte Palette",
+            "shade": "Taupe",
+            "color": "#8B7D6B",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-5",
+            "brand": "Glam Eyes",
+            "name": "Metallic Finish",
+            "shade": "Deep Copper",
+            "color": "#B87333",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-6",
+            "brand": "Glam Eyes",
+            "name": "Metallic Finish",
+            "shade": "Smokey Plum",
+            "color": "#5D4157",
+            "depth": "deep",
+            "undertone": "cool"
+        }
+    ]
+}
