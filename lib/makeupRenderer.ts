@@ -62,7 +62,7 @@ export function renderLipstick(
 }
 
 /**
- * Render blush on the canvas
+ * Render blush on the canvas with natural elliptical contour
  */
 export function renderBlush(
     ctx: CanvasRenderingContext2D,
@@ -79,19 +79,64 @@ export function renderBlush(
     const centerX = cheekLandmarks.reduce((sum, p) => sum + p.x, 0) / cheekLandmarks.length;
     const centerY = cheekLandmarks.reduce((sum, p) => sum + p.y, 0) / cheekLandmarks.length;
 
-    // Create radial gradient for natural blush effect
-    const radius = 40;
-    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+    // Calculate the bounds of cheek landmarks to determine direction and size
+    const minX = Math.min(...cheekLandmarks.map(p => p.x));
+    const maxX = Math.max(...cheekLandmarks.map(p => p.x));
+    const minY = Math.min(...cheekLandmarks.map(p => p.y));
+    const maxY = Math.max(...cheekLandmarks.map(p => p.y));
 
-    gradient.addColorStop(0, color);
-    gradient.addColorStop(0.5, color.replace(')', ', 0.5)').replace('rgb', 'rgba'));
+    const width = maxX - minX;
+    const height = maxY - minY;
+
+    // Create elliptical gradient that sweeps upward and inward
+    // This simulates natural blush application following cheekbone contour
+    const radiusX = Math.max(width * 0.8, 35);
+    const radiusY = Math.max(height * 1.2, 50);
+
+    // Offset the gradient center slightly upward and inward to follow natural application
+    const gradientCenterX = centerX - width * 0.15;
+    const gradientCenterY = centerY - height * 0.3;
+
+    // Create elliptical gradient using canvas transform
+    ctx.save();
+    ctx.translate(gradientCenterX, gradientCenterY);
+
+    // Create a radial gradient and apply elliptical scaling
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(radiusX, radiusY));
+
+    // Parse color to add alpha channel
+    const parseColor = (col: string) => {
+        if (col.startsWith('#')) {
+            const hex = col.slice(1);
+            const r = parseInt(hex.slice(0, 2), 16);
+            const g = parseInt(hex.slice(2, 4), 16);
+            const b = parseInt(hex.slice(4, 6), 16);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        return col;
+    };
+
+    const rgbColor = parseColor(color);
+
+    gradient.addColorStop(0, rgbColor);
+    gradient.addColorStop(0.4, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.5)')}`);
     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
     ctx.fillStyle = gradient;
+
+    // Draw elliptical blush shape
     ctx.beginPath();
-    ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, radiusX, radiusY, -0.3, 0, Math.PI * 2); // Slight rotation for natural angle
     ctx.fill();
 
+    // Add arc overlay for contouring effect
+    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.arc(width * 0.1, -height * 0.2, radiusX * 0.6, 0.2, Math.PI * 1.3);
+    ctx.stroke();
+
+    ctx.restore();
     ctx.restore();
 }
 
