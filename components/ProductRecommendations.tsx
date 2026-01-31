@@ -20,10 +20,7 @@ export default function ProductRecommendationsComponent({
     if (!skinTone || !recommendations) {
         return (
             <div className="glass-strong p-6">
-                <h2 className="text-2xl font-bold gradient-text mb-4">Product Recommendations</h2>
-                <p className="text-gray-400 text-sm">
-                    Upload a photo to get personalized product recommendations
-                </p>
+                <h2 className="text-2xl font-bold gradient-text mb-4">AI generated Skin Tone Recommendations</h2>
             </div>
         );
     }

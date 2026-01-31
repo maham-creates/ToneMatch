@@ -125,7 +125,7 @@ export default function Home() {
                 {/* Main Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                     {/* Left Column - Webcam & Canvas */}
-                    <div className="lg:col-span-7 space-y-6">
+                    <div className="lg:col-span-6 space-y-6">
                         {!isWebcamActive ? (
                             <div className="glass-strong p-12 text-center">
                                 <div className="flex flex-col items-center gap-6">
@@ -193,7 +193,7 @@ export default function Home() {
                     </div>
 
                     {/* Right Column - Recommendations */}
-                    <div className="lg:col-span-2">
+                    <div className="lg:col-span-3">
                         <ProductRecommendationsComponent
                             skinTone={skinTone}
                             recommendations={recommendations}
@@ -205,7 +205,6 @@ export default function Home() {
 
                 {/* Footer */}
                 <footer className="mt-12 text-center text-gray-500 text-sm">
-                    <p>Built for 24-hour hackathon • Prototype demonstration</p>
                     <p className="mt-2">
                         Powered by MediaPipe Face Mesh • Real-time processing
                     </p>
