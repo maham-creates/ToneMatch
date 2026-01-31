@@ -22,14 +22,15 @@ export default function Home() {
     const skinToneDetectedRef = useRef(false);
 
     const [makeupSettings, setMakeupSettings] = useState<MakeupSettings>({
-        lipstick: { enabled: true, color: '#D4869C', opacity: 0.7 },
-        blush: { enabled: false, color: '#F5A9B8', opacity: 0.5 },
-        eyeshadow: { enabled: false, color: '#CD7F32', opacity: 0.6 },
+        lipstick: { enabled: false, color: '#D4869C', opacity: 0 },
+        blush: { enabled: false, color: '#F5A9B8', opacity: 0 },
+        eyeshadow: { enabled: false, color: '#CD7F32', opacity: 0 },
     });
 
     // Initialize MediaPipe when webcam starts
     useEffect(() => {
         if (isWebcamActive) {
+            console.log('Initializing MediaPipe FaceMesh...');
             initializeFaceMeshVideo((detectedLandmarks) => {
                 setLandmarks(detectedLandmarks);
 
@@ -57,6 +58,11 @@ export default function Home() {
                         skinToneDetectedRef.current = true;
                     }
                 }
+            }).then(() => {
+                console.log('MediaPipe initialization complete');
+            }).catch((error) => {
+                console.error('Failed to initialize MediaPipe:', error);
+                setError('Failed to initialize face detection');
             });
         }
     }, [isWebcamActive]);
@@ -192,6 +198,7 @@ export default function Home() {
                             skinTone={skinTone}
                             recommendations={recommendations}
                             onProductClick={handleProductClick}
+                            isDetecting={!!landmarks}
                         />
                     </div>
                 </div>

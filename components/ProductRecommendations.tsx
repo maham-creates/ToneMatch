@@ -8,12 +8,14 @@ interface ProductRecommendationsProps {
     skinTone: SkinToneResult | null;
     recommendations: ProductRecommendations | null;
     onProductClick: (product: Product, category: 'lipstick' | 'blush' | 'eyeshadow') => void;
+    isDetecting?: boolean;
 }
 
 export default function ProductRecommendationsComponent({
     skinTone,
     recommendations,
     onProductClick,
+    isDetecting = false,
 }: ProductRecommendationsProps) {
     if (!skinTone || !recommendations) {
         return (
@@ -52,11 +54,11 @@ export default function ProductRecommendationsComponent({
     );
 
     return (
-        <div className="glass-strong p-6 space-y-6 max-h-[800px] overflow-y-auto">
+        <div className={`glass-strong p-6 space-y-6 max-h-[800px] overflow-y-auto ${skinTone ? 'animate-slide-in-right' : ''}`}>
             <div>
                 <h2 className="text-2xl font-bold gradient-text mb-4">Your Skin Tone</h2>
 
-                <div className="glass p-4 space-y-2">
+                <div className={`glass p-4 space-y-2 ${isDetecting ? 'pulse-glow' : ''}`}>
                     <div className="flex justify-between items-center">
                         <span className="text-gray-400">Depth:</span>
                         <span className="font-semibold capitalize text-purple-300">{skinTone.depth}</span>
