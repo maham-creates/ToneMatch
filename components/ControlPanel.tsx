@@ -1,6 +1,34 @@
 'use client';
 
 import { MakeupSettings } from '@/lib/makeupRenderer';
+import { useState, useEffect } from 'react';
+
+const HexColorInput = ({ value, onChange, disabled }: { value: string, onChange: (val: string) => void, disabled?: boolean }) => {
+    const [localValue, setLocalValue] = useState(value);
+
+    useEffect(() => {
+        setLocalValue(value.toUpperCase());
+    }, [value]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newVal = e.target.value;
+        setLocalValue(newVal);
+        if (/^#[0-9A-Fa-f]{6}$/.test(newVal)) {
+            onChange(newVal);
+        }
+    };
+
+    return (
+        <input
+            type="text"
+            value={localValue}
+            onChange={handleChange}
+            disabled={disabled}
+            className="text-xs text-gray-400 font-mono bg-transparent border-b border-white/20 w-16 focus:outline-none focus:border-purple-500 transition-colors uppercase disabled:opacity-50"
+            maxLength={7}
+        />
+    );
+};
 
 interface ControlPanelProps {
     makeupSettings: MakeupSettings;
@@ -55,7 +83,11 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         <span className="font-semibold text-lg">Lipstick</span>
                     </label>
                     <div className="flex items-center gap-3">
-                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.lipstick.color.toUpperCase()}</code>
+                        <HexColorInput
+                            value={makeupSettings.lipstick.color}
+                            onChange={(val) => updateSetting('lipstick', 'color', val)}
+                            disabled={!makeupSettings.lipstick.enabled}
+                        />
                         <input
                             type="color"
                             value={makeupSettings.lipstick.color}
@@ -99,7 +131,11 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         <span className="font-semibold text-lg">Blush</span>
                     </label>
                     <div className="flex items-center gap-3">
-                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.blush.color.toUpperCase()}</code>
+                        <HexColorInput
+                            value={makeupSettings.blush.color}
+                            onChange={(val) => updateSetting('blush', 'color', val)}
+                            disabled={!makeupSettings.blush.enabled}
+                        />
                         <input
                             type="color"
                             value={makeupSettings.blush.color}
@@ -143,7 +179,11 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         <span className="font-semibold text-lg">Eyeshadow</span>
                     </label>
                     <div className="flex items-center gap-3">
-                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.eyeshadow.color.toUpperCase()}</code>
+                        <HexColorInput
+                            value={makeupSettings.eyeshadow.color}
+                            onChange={(val) => updateSetting('eyeshadow', 'color', val)}
+                            disabled={!makeupSettings.eyeshadow.enabled}
+                        />
                         <input
                             type="color"
                             value={makeupSettings.eyeshadow.color}
