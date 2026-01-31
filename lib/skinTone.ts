@@ -151,7 +151,7 @@ export function detectSkinTone(
         undertone,
         confidence,
         disclaimer:
-            'This is a prototype skin tone detection. Results are heavily affected by lighting conditions and should not be considered production-accurate.',
+            'Skin tone analysis based on facial features detected by the camera. For best results, ensure good lighting.',
     };
 }
 

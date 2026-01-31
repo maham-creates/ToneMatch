@@ -1,4 +1,4 @@
-// MediaPipe Face Mesh integration for real-time video processing
+// MediaPipe Face Mesh integration for real-time video processing using CDN
 
 export interface FacialLandmarks {
     lips: { x: number; y: number }[];
@@ -27,6 +27,33 @@ const RIGHT_EYE_INDICES = [
 
 let faceMeshInstance: any = null;
 let isProcessing = false;
+let scriptsLoaded = false;
+
+/**
+ * Load MediaPipe scripts from CDN
+ */
+async function loadMediaPipeScripts(): Promise<void> {
+    if (scriptsLoaded) return;
+
+    return new Promise((resolve, reject) => {
+        // Load the main MediaPipe script
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js';
+        script.crossOrigin = 'anonymous';
+
+        script.onload = () => {
+            console.log('MediaPipe script loaded from CDN');
+            scriptsLoaded = true;
+            resolve();
+        };
+
+        script.onerror = () => {
+            reject(new Error('Failed to load MediaPipe script from CDN'));
+        };
+
+        document.head.appendChild(script);
+    });
+}
 
 /**
  * Initialize MediaPipe Face Mesh for video
@@ -38,63 +65,88 @@ export async function initializeFaceMeshVideo(
         return faceMeshInstance;
     }
 
-    // Dynamic import to avoid SSR issues
-    const { FaceMesh } = await import('@mediapipe/face_mesh');
+    try {
+        // Load MediaPipe scripts from CDN
+        await loadMediaPipeScripts();
 
-    const faceMesh = new FaceMesh({
-        locateFile: (file) => {
-            return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
-        },
-    });
+        // Wait a bit for the global FaceMesh to be available
+        await new Promise(resolve => setTimeout(resolve, 500));
 
-    faceMesh.setOptions({
-        maxNumFaces: 1,
-        refineLandmarks: true,
-        minDetectionConfidence: 0.5,
-        minTrackingConfidence: 0.5,
-    });
+        // Access FaceMesh from global window object
+        const FaceMesh = (window as any).FaceMesh;
 
-    faceMesh.onResults((results: any) => {
-        if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
-            const landmarks = results.multiFaceLandmarks[0];
-            const width = results.image.width;
-            const height = results.image.height;
-
-            const convertLandmarks = (indices: number[]) => {
-                return indices.map((index) => ({
-                    x: landmarks[index].x * width,
-                    y: landmarks[index].y * height,
-                }));
-            };
-
-            const facialLandmarks: FacialLandmarks = {
-                lips: convertLandmarks(LIPS_INDICES),
-                leftCheek: convertLandmarks(LEFT_CHEEK_INDICES),
-                rightCheek: convertLandmarks(RIGHT_CHEEK_INDICES),
-                leftEye: convertLandmarks(LEFT_EYE_INDICES),
-                rightEye: convertLandmarks(RIGHT_EYE_INDICES),
-                allLandmarks: landmarks.map((lm: any) => ({
-                    x: lm.x * width,
-                    y: lm.y * height,
-                })),
-            };
-
-            onResults(facialLandmarks);
-        } else {
-            onResults(null);
+        if (!FaceMesh) {
+            throw new Error('FaceMesh not found on window object after loading CDN script');
         }
-        isProcessing = false;
-    });
 
-    faceMeshInstance = faceMesh;
-    return faceMesh;
+        console.log('Creating FaceMesh instance from CDN...');
+
+        // Create FaceMesh instance
+        const faceMesh = new FaceMesh({
+            locateFile: (file: string) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
+            },
+        });
+
+        faceMesh.setOptions({
+            maxNumFaces: 1,
+            refineLandmarks: true,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5,
+        });
+
+        faceMesh.onResults((results: any) => {
+            console.log('MediaPipe onResults called', { hasLandmarks: !!results.multiFaceLandmarks?.length });
+
+            if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+                const landmarks = results.multiFaceLandmarks[0];
+                const width = results.image.width;
+                const height = results.image.height;
+
+                const convertLandmarks = (indices: number[]) => {
+                    return indices.map((index) => ({
+                        x: landmarks[index].x * width,
+                        y: landmarks[index].y * height,
+                    }));
+                };
+
+                const facialLandmarks: FacialLandmarks = {
+                    lips: convertLandmarks(LIPS_INDICES),
+                    leftCheek: convertLandmarks(LEFT_CHEEK_INDICES),
+                    rightCheek: convertLandmarks(RIGHT_CHEEK_INDICES),
+                    leftEye: convertLandmarks(LEFT_EYE_INDICES),
+                    rightEye: convertLandmarks(RIGHT_EYE_INDICES),
+                    allLandmarks: landmarks.map((lm: any) => ({
+                        x: lm.x * width,
+                        y: lm.y * height,
+                    })),
+                };
+
+                onResults(facialLandmarks);
+            } else {
+                onResults(null);
+            }
+            isProcessing = false;
+        });
+
+        console.log('MediaPipe FaceMesh initialized successfully via CDN');
+        faceMeshInstance = faceMesh;
+        return faceMesh;
+    } catch (error) {
+        console.error('Error initializing MediaPipe:', error);
+        throw error;
+    }
 }
 
 /**
  * Process a video frame
  */
 export async function processVideoFrame(video: HTMLVideoElement): Promise<void> {
-    if (!faceMeshInstance || isProcessing) {
+    if (!faceMeshInstance) {
+        return;
+    }
+
+    if (isProcessing) {
         return;
     }
 
@@ -105,6 +157,7 @@ export async function processVideoFrame(video: HTMLVideoElement): Promise<void> 
         console.error('Error processing frame:', error);
         isProcessing = false;
     }
+    // Note: isProcessing is reset to false in the onResults callback
 }
 
 /**
