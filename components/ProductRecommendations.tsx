@@ -44,7 +44,10 @@ export default function ProductRecommendationsComponent({
                 <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm truncate">{product.brand}</p>
                     <p className="text-xs text-gray-400 truncate">{product.name}</p>
-                    <p className="text-xs text-purple-300 truncate">{product.shade}</p>
+                    <div className="flex justify-between items-center mt-1">
+                        <p className="text-xs text-purple-300 truncate">{product.shade}</p>
+                        <code className="text-[10px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">{product.color.toUpperCase()}</code>
+                    </div>
                 </div>
             </div>
         </button>
