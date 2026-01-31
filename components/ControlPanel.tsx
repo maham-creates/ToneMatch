@@ -54,13 +54,16 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Lipstick</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.lipstick.color}
-                        onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
-                        disabled={!makeupSettings.lipstick.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.lipstick.color.toUpperCase()}</code>
+                        <input
+                            type="color"
+                            value={makeupSettings.lipstick.color}
+                            onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
+                            disabled={!makeupSettings.lipstick.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">
@@ -95,13 +98,16 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Blush</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.blush.color}
-                        onChange={(e) => updateSetting('blush', 'color', e.target.value)}
-                        disabled={!makeupSettings.blush.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.blush.color.toUpperCase()}</code>
+                        <input
+                            type="color"
+                            value={makeupSettings.blush.color}
+                            onChange={(e) => updateSetting('blush', 'color', e.target.value)}
+                            disabled={!makeupSettings.blush.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">
@@ -136,13 +142,16 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Eyeshadow</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.eyeshadow.color}
-                        onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
-                        disabled={!makeupSettings.eyeshadow.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <code className="text-xs text-gray-400 font-mono">{makeupSettings.eyeshadow.color.toUpperCase()}</code>
+                        <input
+                            type="color"
+                            value={makeupSettings.eyeshadow.color}
+                            onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
+                            disabled={!makeupSettings.eyeshadow.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">

@@ -76,12 +76,18 @@ export default function Home() {
         product: Product,
         category: 'lipstick' | 'blush' | 'eyeshadow'
     ) => {
+        const defaultOpacities = {
+            lipstick: 0.7,
+            blush: 0.5,
+            eyeshadow: 0.6
+        };
+
         setMakeupSettings({
             ...makeupSettings,
             [category]: {
                 enabled: true,
                 color: product.color,
-                opacity: makeupSettings[category].opacity,
+                opacity: defaultOpacities[category],
             },
         });
     };
