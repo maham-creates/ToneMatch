@@ -73,7 +73,7 @@ export function renderBlush(
     if (cheekLandmarks.length === 0) return;
 
     ctx.save();
-    ctx.globalAlpha = opacity * 0.6; // Blush should be more subtle
+    ctx.globalAlpha = opacity * 0.7; // Blush should be visible
 
     // Calculate center of cheek
     const centerX = cheekLandmarks.reduce((sum, p) => sum + p.x, 0) / cheekLandmarks.length;
@@ -89,20 +89,13 @@ export function renderBlush(
     const height = maxY - minY;
 
     // Create elliptical gradient that sweeps upward and inward
-    // This simulates natural blush application following cheekbone contour
-    const radiusX = Math.max(width * 0.8, 35);
-    const radiusY = Math.max(height * 1.2, 50);
+    // Smaller radiuses to stay on cheek, not reach eyes
+    const radiusX = Math.max(width * 0.25, 15);
+    const radiusY = Math.max(height * 0.4, 20);
 
     // Offset the gradient center slightly upward and inward to follow natural application
-    const gradientCenterX = centerX - width * 0.15;
-    const gradientCenterY = centerY - height * 0.3;
-
-    // Create elliptical gradient using canvas transform
-    ctx.save();
-    ctx.translate(gradientCenterX, gradientCenterY);
-
-    // Create a radial gradient and apply elliptical scaling
-    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(radiusX, radiusY));
+    const gradientCenterX = centerX - width * 0.2;
+    const gradientCenterY = centerY - height * 0.4;
 
     // Parse color to add alpha channel
     const parseColor = (col: string) => {
@@ -118,23 +111,50 @@ export function renderBlush(
 
     const rgbColor = parseColor(color);
 
+    // Draw multiple layers for more defined appearance
+    
+    // Layer 1: Base gradient fill
+    ctx.save();
+    ctx.translate(gradientCenterX, gradientCenterY);
+
+    const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, Math.max(radiusX, radiusY));
     gradient.addColorStop(0, rgbColor);
-    gradient.addColorStop(0.4, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.5)')}`);
+    gradient.addColorStop(0.3, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.7)')}`);
+    gradient.addColorStop(0.6, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`);
     gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
 
     ctx.fillStyle = gradient;
 
-    // Draw elliptical blush shape
+    // Draw main elliptical blush shape
     ctx.beginPath();
-    ctx.ellipse(0, 0, radiusX, radiusY, -0.3, 0, Math.PI * 2); // Slight rotation for natural angle
+    ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
-    // Add arc overlay for contouring effect
-    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.3)')}`;
-    ctx.lineWidth = 2;
+    // Layer 2: Add defined stroke for edge definition
+    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.4)')}`;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(width * 0.1, -height * 0.2, radiusX * 0.6, 0.2, Math.PI * 1.3);
+    ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
     ctx.stroke();
+
+    // Layer 3: Add secondary arc for contouring (sweep effect)
+    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.35)')}`;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.arc(radiusX * 0.3, -radiusY * 0.15, radiusX * 0.7, 0.5, Math.PI * 1.4);
+    ctx.stroke();
+
+    // Layer 4: Add highlight arc for natural depth
+    const highlightGradient = ctx.createLinearGradient(-radiusX * 0.5, -radiusY * 0.3, radiusX * 0.5, radiusY * 0.3);
+    highlightGradient.addColorStop(0, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.2)')}`);
+    highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
+    highlightGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+    ctx.fillStyle = highlightGradient;
+    ctx.beginPath();
+    ctx.ellipse(0, -radiusY * 0.2, radiusX * 0.8, radiusY * 0.5, -0.3, 0, Math.PI * 2);
+    ctx.fill();
 
     ctx.restore();
     ctx.restore();
