@@ -9,7 +9,7 @@ import VideoMakeupCanvas from '@/components/VideoMakeupCanvas';
 import { initializeFaceMeshVideo, processVideoFrame, FacialLandmarks } from '@/lib/mediapipe-video';
 
 export default function AccessoriesPage() {
-    const [isWebcamActive, setIsWebcamActive] = useState(false);
+    const [isWebcamActive, setIsWebcamActive] = useState(true);
     const [landmarks, setLandmarks] = useState<FacialLandmarks | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [uploadedImages, setUploadedImages] = useState<string[]>([]);
@@ -82,9 +82,9 @@ export default function AccessoriesPage() {
                 {/* Main Content */}
                 <div className="max-w-6xl mx-auto space-y-8">
                     {!isWebcamActive ? (
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                            {/* Center Mirror Box (spans 2 columns) - Now on the left */}
-                            <div className="lg:col-span-2 glass-strong p-12 text-center flex flex-col items-center justify-center border border-white/5 transition-all">
+                        <div className="flex justify-center items-center">
+                            {/* Center Mirror Box - Now centered and full width of max-container */}
+                            <div className="w-full max-w-4xl glass-strong p-12 text-center flex flex-col items-center justify-center border border-white/5 transition-all">
                                 <div className="flex flex-col items-center gap-6">
                                     <svg
                                         className="w-20 h-20 text-blue-400"
@@ -116,41 +116,6 @@ export default function AccessoriesPage() {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* Upload accessory tile - Now on the right */}
-                            <button
-                                onClick={() => fileInputRef.current?.click()}
-                                className="glass-strong p-8 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all duration-500 relative overflow-hidden"
-                            >
-                                {uploadedImages.length > 0 ? (
-                                    <>
-                                        <img src={uploadedImages[0]} alt="Preview" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity" />
-                                        <div className="relative z-10">
-                                            <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 border border-blue-500/40 backdrop-blur-md">
-                                                <svg className="w-8 h-8 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                                </svg>
-                                            </div>
-                                            <h3 className="text-xl font-bold mb-3 text-white">Change Accessory</h3>
-                                            <p className="text-blue-200 text-sm leading-relaxed">
-                                                Click to upload a different accessory image.
-                                            </p>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mb-6 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500">
-                                            <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">Upload accessory</h3>
-                                        <p className="text-gray-400 text-sm leading-relaxed">
-                                            Select an accessory image from your computer for virtual try-on.
-                                        </p>
-                                    </>
-                                )}
-                            </button>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -173,9 +138,14 @@ export default function AccessoriesPage() {
                                     </div>
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
-                                        className="w-full glass-strong p-4 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all text-xs"
+                                        className="w-full glass-strong p-4 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all text-sm group"
                                     >
-                                        <span className="text-blue-400 font-semibold mb-1">Change Accessory</span>
+                                        <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-blue-400 font-semibold text-xs">Upload Accessory</span>
                                     </button>
                                 </div>
                                 <button
@@ -197,19 +167,16 @@ export default function AccessoriesPage() {
                                         blush: { enabled: false, color: '', opacity: 0 },
                                         eyeshadow: { enabled: false, color: '', opacity: 0 },
                                     }}
+                                    accessoryImage={uploadedImages[0]}
                                 />
                                 {!landmarks && (
                                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 glass px-4 py-2 rounded-lg z-20">
                                         <p className="text-sm text-yellow-300">Looking for face...</p>
                                     </div>
                                 )}
-                                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 glass px-6 py-3 rounded-xl border border-blue-500/30 z-20 backdrop-blur-md">
-                                    <p className="text-blue-300 font-medium">✨ Accessories feature in development</p>
-                                </div>
                             </div>
                         </div>
                     )}
-
                     {/* Consolidated hidden file input */}
                     <input
                         type="file"
@@ -218,7 +185,6 @@ export default function AccessoriesPage() {
                         accept="image/*"
                         onChange={handleFileUpload}
                     />
-
 
                 </div>
             </div>
