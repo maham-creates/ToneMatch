@@ -205,6 +205,7 @@ export function renderEyeshadow(
     ctx.restore();
 }
 
+
 /**
  * Render an accessory image focused on specific facial regions
  */
