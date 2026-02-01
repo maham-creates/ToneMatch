@@ -177,7 +177,7 @@ export default function AccessoriesPage() {
                                     <div className="space-y-3 p-4 glass rounded-xl border border-white/5">
                                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Placement</p>
                                         <div className="grid grid-cols-2 gap-2">
-                                            {(['glasses', 'earrings', 'hat', 'generic'] as const).map((cat) => (
+                                            {(['glasses', 'earrings', 'hat', 'nose-left', 'nose-right', 'generic'] as const).map((cat) => (
                                                 <button
                                                     key={cat}
                                                     onClick={() => setAccessoryCategory(cat)}
@@ -186,7 +186,10 @@ export default function AccessoriesPage() {
                                                         : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
                                                         }`}
                                                 >
-                                                    {cat === 'generic' ? 'Center' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                                    {cat === 'generic' ? 'Center' :
+                                                        cat === 'nose-left' ? 'Left Nose' :
+                                                            cat === 'nose-right' ? 'Right Nose' :
+                                                                cat.charAt(0).toUpperCase() + cat.slice(1)}
                                                 </button>
                                             ))}
                                         </div>

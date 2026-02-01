@@ -10,7 +10,7 @@ export default function Home() {
                 <header className="text-center mb-16 animate-fade-in">
                     <h1 className="text-7xl font-bold gradient-text mb-6">ToneMatch</h1>
                     <p className="text-gray-400/80 italic font-serif text-lg mb-8 max-w-2xl mx-auto">
-                        Disclaimer: You are already beautiful enough, we're just here to help you shine.
+                        You are already beautiful enough, we're just here to help you shine.
                     </p>
                     <div className="h-1 w-24 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full"></div>
                 </header>
@@ -59,7 +59,7 @@ export default function Home() {
                 {/* Footer Quote */}
                 <footer className="mt-20 text-center animate-fade-in" style={{ animationDelay: '0.4s' }}>
                     <p className="text-gray-600 text-sm">
-                        Experience the future of personalized beauty with ToneMatch.
+                        Disclaimer: We do not use or store your personal data.
                     </p>
                 </footer>
             </div>
