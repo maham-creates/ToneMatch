@@ -7,6 +7,8 @@ export interface FacialLandmarks {
     rightCheek: { x: number; y: number }[];
     leftEye: { x: number; y: number }[];
     rightEye: { x: number; y: number }[];
+    leftEyeshadow: { x: number; y: number }[];
+    rightEyeshadow: { x: number; y: number }[];
     allLandmarks: { x: number; y: number }[];
 }
 
@@ -24,6 +26,14 @@ const LEFT_EYE_INDICES = [
 ];
 const RIGHT_EYE_INDICES = [
     362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398
+];
+
+const LEFT_EYESHADOW_INDICES = [
+    33, 161, 160, 159, 158, 157, 173, 133, 243, 190, 56, 28, 27, 29, 30, 247, 130
+];
+
+const RIGHT_EYESHADOW_INDICES = [
+    362, 398, 384, 385, 386, 387, 388, 466, 263, 463, 414, 286, 258, 257, 259, 260, 467, 359
 ];
 
 let faceMeshInstance: any = null;
@@ -90,6 +100,8 @@ export async function processFaceImage(
                     rightCheek: convertLandmarks(RIGHT_CHEEK_INDICES),
                     leftEye: convertLandmarks(LEFT_EYE_INDICES),
                     rightEye: convertLandmarks(RIGHT_EYE_INDICES),
+                    leftEyeshadow: convertLandmarks(LEFT_EYESHADOW_INDICES),
+                    rightEyeshadow: convertLandmarks(RIGHT_EYESHADOW_INDICES),
                     allLandmarks: landmarks.map((lm: any) => ({
                         x: lm.x * width,
                         y: lm.y * height,
