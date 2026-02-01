@@ -1,6 +1,34 @@
 'use client';
 
 import { MakeupSettings } from '@/lib/makeupRenderer';
+import { useState, useEffect } from 'react';
+
+const HexColorInput = ({ value, onChange, disabled }: { value: string, onChange: (val: string) => void, disabled?: boolean }) => {
+    const [localValue, setLocalValue] = useState(value);
+
+    useEffect(() => {
+        setLocalValue(value.toUpperCase());
+    }, [value]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newVal = e.target.value;
+        setLocalValue(newVal);
+        if (/^#[0-9A-Fa-f]{6}$/.test(newVal)) {
+            onChange(newVal);
+        }
+    };
+
+    return (
+        <input
+            type="text"
+            value={localValue}
+            onChange={handleChange}
+            disabled={disabled}
+            className="text-xs text-gray-400 font-mono bg-transparent border-b border-white/20 w-16 focus:outline-none focus:border-purple-500 transition-colors uppercase disabled:opacity-50"
+            maxLength={7}
+        />
+    );
+};
 
 interface ControlPanelProps {
     makeupSettings: MakeupSettings;
@@ -45,7 +73,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Lipstick Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.lipstick.enabled}
@@ -54,13 +82,20 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Lipstick</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.lipstick.color}
-                        onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
-                        disabled={!makeupSettings.lipstick.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <HexColorInput
+                            value={makeupSettings.lipstick.color}
+                            onChange={(val) => updateSetting('lipstick', 'color', val)}
+                            disabled={!makeupSettings.lipstick.enabled}
+                        />
+                        <input
+                            type="color"
+                            value={makeupSettings.lipstick.color}
+                            onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
+                            disabled={!makeupSettings.lipstick.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">
@@ -86,7 +121,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Blush Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.blush.enabled}
@@ -95,13 +130,20 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Blush</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.blush.color}
-                        onChange={(e) => updateSetting('blush', 'color', e.target.value)}
-                        disabled={!makeupSettings.blush.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <HexColorInput
+                            value={makeupSettings.blush.color}
+                            onChange={(val) => updateSetting('blush', 'color', val)}
+                            disabled={!makeupSettings.blush.enabled}
+                        />
+                        <input
+                            type="color"
+                            value={makeupSettings.blush.color}
+                            onChange={(e) => updateSetting('blush', 'color', e.target.value)}
+                            disabled={!makeupSettings.blush.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">
@@ -127,7 +169,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Eyeshadow Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.eyeshadow.enabled}
@@ -136,13 +178,20 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         />
                         <span className="font-semibold text-lg">Eyeshadow</span>
                     </label>
-                    <input
-                        type="color"
-                        value={makeupSettings.eyeshadow.color}
-                        onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
-                        disabled={!makeupSettings.eyeshadow.enabled}
-                        className="cursor-pointer disabled:opacity-50"
-                    />
+                    <div className="flex items-center gap-3">
+                        <HexColorInput
+                            value={makeupSettings.eyeshadow.color}
+                            onChange={(val) => updateSetting('eyeshadow', 'color', val)}
+                            disabled={!makeupSettings.eyeshadow.enabled}
+                        />
+                        <input
+                            type="color"
+                            value={makeupSettings.eyeshadow.color}
+                            onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
+                            disabled={!makeupSettings.eyeshadow.enabled}
+                            className="cursor-pointer disabled:opacity-50"
+                        />
+                    </div>
                 </div>
 
                 <div className="space-y-2">

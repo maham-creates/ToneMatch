@@ -1,21 +1,44 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import { applyMakeup, MakeupSettings } from '@/lib/makeupRenderer';
+import { useEffect, useRef, useState } from 'react';
+import { applyMakeup, MakeupSettings, AccessoryCategory } from '@/lib/makeupRenderer';
 import { FacialLandmarks } from '@/lib/mediapipe-video';
 
 interface VideoMakeupCanvasProps {
     videoElement: HTMLVideoElement | null;
     landmarks: FacialLandmarks | null;
     makeupSettings: MakeupSettings;
+    accessoryImage?: string | null;
+    accessoryCategory?: AccessoryCategory;
 }
 
 export default function VideoMakeupCanvas({
     videoElement,
     landmarks,
-    makeupSettings
+    makeupSettings,
+    accessoryImage,
+    accessoryCategory = 'glasses'
 }: VideoMakeupCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const [loadedAccessoryImage, setLoadedAccessoryImage] = useState<HTMLImageElement | null>(null);
+
+    // Pre-load accessory image when it changes
+    useEffect(() => {
+        if (accessoryImage) {
+            const img = new Image();
+            img.crossOrigin = 'anonymous'; // Ensure CORS compatibility
+            img.src = accessoryImage;
+            img.onload = () => {
+                setLoadedAccessoryImage(img);
+            };
+            img.onerror = (e) => {
+                console.error("Failed to load accessory image", e);
+                setLoadedAccessoryImage(null);
+            };
+        } else {
+            setLoadedAccessoryImage(null);
+        }
+    }, [accessoryImage]);
 
     useEffect(() => {
         if (!canvasRef.current || !videoElement || !landmarks) return;
@@ -38,10 +61,17 @@ export default function VideoMakeupCanvas({
         ctx.scale(-1, 1);
         ctx.translate(-canvas.width, 0);
 
-        applyMakeup(ctx, landmarks, makeupSettings);
+        applyMakeup(ctx, landmarks, {
+            ...makeupSettings,
+            accessory: {
+                image: loadedAccessoryImage,
+                opacity: 0.9,
+                category: accessoryCategory
+            }
+        });
 
         ctx.restore();
-    }, [videoElement, landmarks, makeupSettings]);
+    }, [videoElement, landmarks, makeupSettings, accessoryCategory]);
 
     return (
         <canvas

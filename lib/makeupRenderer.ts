@@ -1,5 +1,9 @@
 // Canvas-based makeup rendering utilities
 
+import { FacialLandmarks } from '@/lib/mediapipe-video';
+
+export type AccessoryCategory = 'glasses' | 'earrings' | 'hat' | 'nose-left' | 'nose-right' | 'generic';
+
 export interface MakeupSettings {
     lipstick: {
         enabled: boolean;
@@ -16,6 +20,11 @@ export interface MakeupSettings {
         color: string;
         opacity: number;
     };
+    accessory?: {
+        image: HTMLImageElement | null;
+        opacity: number;
+        category?: AccessoryCategory;
+    };
 }
 
 /**
@@ -23,40 +32,44 @@ export interface MakeupSettings {
  */
 export function renderLipstick(
     ctx: CanvasRenderingContext2D,
-    lipLandmarks: { x: number; y: number }[],
+    outerLipLandmarks: { x: number; y: number }[],
+    innerLipLandmarks: { x: number; y: number }[],
     color: string,
     opacity: number
 ) {
-    if (lipLandmarks.length === 0) return;
+    if (outerLipLandmarks.length === 0) return;
 
     ctx.save();
     ctx.globalAlpha = opacity;
     ctx.fillStyle = color;
 
-    // Create a path from lip landmarks
+    // Create a path with a hole using the even-odd fill rule
     ctx.beginPath();
-    ctx.moveTo(lipLandmarks[0].x, lipLandmarks[0].y);
 
-    for (let i = 1; i < lipLandmarks.length; i++) {
-        ctx.lineTo(lipLandmarks[i].x, lipLandmarks[i].y);
+    // Outer lips
+    ctx.moveTo(outerLipLandmarks[0].x, outerLipLandmarks[0].y);
+    for (let i = 1; i < outerLipLandmarks.length; i++) {
+        ctx.lineTo(outerLipLandmarks[i].x, outerLipLandmarks[i].y);
+    }
+    ctx.closePath();
+
+    // Inner lips (as a hole if possible)
+    if (innerLipLandmarks.length > 0) {
+        ctx.moveTo(innerLipLandmarks[0].x, innerLipLandmarks[0].y);
+        for (let i = 1; i < innerLipLandmarks.length; i++) {
+            ctx.lineTo(innerLipLandmarks[i].x, innerLipLandmarks[i].y);
+        }
+        ctx.closePath();
     }
 
-    ctx.closePath();
-    ctx.fill();
+    // Use fill rule 'evenodd' to create the hole
+    ctx.fill('evenodd');
 
-    // Add a subtle gradient for depth
-    const centerX = lipLandmarks.reduce((sum, p) => sum + p.x, 0) / lipLandmarks.length;
-    const centerY = lipLandmarks.reduce((sum, p) => sum + p.y, 0) / lipLandmarks.length;
-    const radius = Math.max(
-        ...lipLandmarks.map(p => Math.sqrt((p.x - centerX) ** 2 + (p.y - centerY) ** 2))
-    );
-
-    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
-
-    ctx.fillStyle = gradient;
-    ctx.fill();
+    // Add soft feathering
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 4;
+    ctx.globalAlpha = opacity * 0.5;
+    ctx.stroke();
 
     ctx.restore();
 }
@@ -112,7 +125,7 @@ export function renderBlush(
     const rgbColor = parseColor(color);
 
     // Draw multiple layers for more defined appearance
-    
+
     // Layer 1: Base gradient fill
     ctx.save();
     ctx.translate(gradientCenterX, gradientCenterY);
@@ -126,34 +139,16 @@ export function renderBlush(
     ctx.fillStyle = gradient;
 
     // Draw main elliptical blush shape
+    ctx.filter = 'blur(12px)'; // Large blur for natural transition
     ctx.beginPath();
     ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
-    // Layer 2: Add defined stroke for edge definition
-    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.4)')}`;
-    ctx.lineWidth = 1.5;
+    // Layer 2: Add defined center core
+    ctx.filter = 'blur(6px)';
+    ctx.globalAlpha = opacity * 0.4;
     ctx.beginPath();
-    ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Layer 3: Add secondary arc for contouring (sweep effect)
-    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.35)')}`;
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.arc(radiusX * 0.3, -radiusY * 0.15, radiusX * 0.7, 0.5, Math.PI * 1.4);
-    ctx.stroke();
-
-    // Layer 4: Add highlight arc for natural depth
-    const highlightGradient = ctx.createLinearGradient(-radiusX * 0.5, -radiusY * 0.3, radiusX * 0.5, radiusY * 0.3);
-    highlightGradient.addColorStop(0, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.2)')}`);
-    highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
-    highlightGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-    ctx.fillStyle = highlightGradient;
-    ctx.beginPath();
-    ctx.ellipse(0, -radiusY * 0.2, radiusX * 0.8, radiusY * 0.5, -0.3, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, radiusX * 0.6, radiusY * 0.6, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.restore();
@@ -184,6 +179,11 @@ export function renderEyeshadow(
 
     ctx.closePath();
     ctx.fillStyle = color;
+
+    // Soft feathering for eyeshadow
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.filter = 'blur(2px)';
     ctx.fill();
 
     // Add gradient for depth
@@ -201,10 +201,113 @@ export function renderEyeshadow(
     ctx.restore();
 }
 
+
+/**
+ * Render an accessory image focused on specific facial regions
+ */
+export function renderAccessory(
+    ctx: CanvasRenderingContext2D,
+    landmarks: { x: number; y: number }[],
+    image: HTMLImageElement,
+    opacity: number,
+    category: AccessoryCategory = 'generic'
+) {
+    if (landmarks.length < 468 || !image.complete) return;
+
+    ctx.save();
+    ctx.globalAlpha = opacity;
+
+    if (category === 'glasses' || category === 'generic') {
+        // Use eye corners (indices 33 and 263) and nose bridge (168)
+        const leftEye = landmarks[33];
+        const rightEye = landmarks[263];
+        const noseBridge = landmarks[168];
+
+        const dx = rightEye.x - leftEye.x;
+        const dy = rightEye.y - leftEye.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+
+        ctx.translate(noseBridge.x, noseBridge.y);
+        ctx.rotate(angle);
+        const scale = distance / (image.width * 0.5);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, -image.height / 2);
+    } else if (category === 'earrings') {
+        // Render on both ear lobes (indices 132 and 361)
+        const leftLobe = landmarks[132];
+        const rightLobe = landmarks[361];
+        const faceWidth = Math.abs(landmarks[454].x - landmarks[234].x);
+        const scale = (faceWidth / image.width) * 0.15; // Small scale for earrings
+
+        // Left earring
+        ctx.save();
+        ctx.translate(leftLobe.x, leftLobe.y);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, 0); // Hang from the lobe
+        ctx.restore();
+
+        // Right earring
+        ctx.save();
+        ctx.translate(rightLobe.x, rightLobe.y);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, 0);
+        ctx.restore();
+    } else if (category === 'hat') {
+        // Render on top of head (index 10 is crown/top center)
+        const topCenter = landmarks[10];
+        const leftTemple = landmarks[127];
+        const rightTemple = landmarks[356];
+
+        const dx = rightTemple.x - leftTemple.x;
+        const dy = rightTemple.y - leftTemple.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+
+        ctx.translate(topCenter.x, topCenter.y);
+        ctx.rotate(angle);
+        const scale = (distance / image.width) * 1.5; // Hats should be wider than face
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, -image.height * 0.8); // Offset upward to sit ON head
+    } else if (category === 'nose-left') {
+        renderNoseAccessory(ctx, landmarks, image, 279, 49);
+    } else if (category === 'nose-right') {
+        renderNoseAccessory(ctx, landmarks, image, 49, 279);
+    }
+
+    ctx.restore();
+}
+
+function renderNoseAccessory(
+    ctx: CanvasRenderingContext2D,
+    landmarks: { x: number; y: number }[],
+    image: HTMLImageElement,
+    targetIndex: number,
+    referenceIndex: number
+) {
+    const nosePoint = landmarks[targetIndex];
+
+    // Calculate scale based on face width or nose width
+    // We use the distance between nostrils (indices 279 and 49) 
+    // to determine a relative scale for the jewelry
+    const p1 = landmarks[279]; // Left nostril
+    const p2 = landmarks[49];  // Right nostril
+    const noseWidth = Math.sqrt(
+        Math.pow(p1.x - p2.x, 2) +
+        Math.pow(p1.y - p2.y, 2)
+    );
+
+    ctx.translate(nosePoint.x, nosePoint.y);
+    // Scale to be relatively small compared to nose width
+    const scale = noseWidth / image.width * 0.5;
+    ctx.scale(scale, scale);
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+}
+
 /**
  * Clear the canvas
  */
-export function clearCanvas(ctx: CanvasRenderingContext2D, width: number, height: number) {
+export function cleanupCanvas(ctx: CanvasRenderingContext2D, width: number, height: number) {
     ctx.clearRect(0, 0, width, height);
 }
 
@@ -213,17 +316,11 @@ export function clearCanvas(ctx: CanvasRenderingContext2D, width: number, height
  */
 export function applyMakeup(
     ctx: CanvasRenderingContext2D,
-    landmarks: {
-        lips: { x: number; y: number }[];
-        leftCheek: { x: number; y: number }[];
-        rightCheek: { x: number; y: number }[];
-        leftEye: { x: number; y: number }[];
-        rightEye: { x: number; y: number }[];
-    },
+    landmarks: FacialLandmarks,
     settings: MakeupSettings
 ) {
     // Clear previous makeup
-    clearCanvas(ctx, ctx.canvas.width, ctx.canvas.height);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     // Apply makeup in order (back to front)
     if (settings.blush.enabled) {
@@ -232,11 +329,21 @@ export function applyMakeup(
     }
 
     if (settings.eyeshadow.enabled) {
-        renderEyeshadow(ctx, landmarks.leftEye, settings.eyeshadow.color, settings.eyeshadow.opacity);
-        renderEyeshadow(ctx, landmarks.rightEye, settings.eyeshadow.color, settings.eyeshadow.opacity);
+        renderEyeshadow(ctx, landmarks.leftEyeshadow, settings.eyeshadow.color, settings.eyeshadow.opacity);
+        renderEyeshadow(ctx, landmarks.rightEyeshadow, settings.eyeshadow.color, settings.eyeshadow.opacity);
     }
 
     if (settings.lipstick.enabled) {
-        renderLipstick(ctx, landmarks.lips, settings.lipstick.color, settings.lipstick.opacity);
+        renderLipstick(ctx, landmarks.lips, landmarks.innerLips, settings.lipstick.color, settings.lipstick.opacity);
+    }
+
+    if (settings.accessory?.image && settings.accessory.image.complete) {
+        renderAccessory(
+            ctx,
+            landmarks.allLandmarks,
+            settings.accessory.image,
+            settings.accessory.opacity,
+            settings.accessory.category
+        );
     }
 }
