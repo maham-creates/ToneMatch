@@ -8,8 +8,11 @@ export interface Product {
     name: string;
     shade: string;
     color: string;
-    depth: 'light' | 'medium' | 'deep';
-    undertone: 'warm' | 'neutral' | 'cool';
+    price?: number;
+    url?: string;
+    retailer?: string;
+    depth?: 'light' | 'medium' | 'deep';
+    undertone?: 'warm' | 'neutral' | 'cool';
 }
 
 export interface ProductRecommendations {
@@ -26,7 +29,10 @@ export function getRecommendedProducts(
     undertone: 'warm' | 'neutral' | 'cool'
 ): ProductRecommendations {
     const filterProducts = (products: Product[]) => {
+        // If products don't have depth/undertone, return them all (universal)
         return products.filter((product) => {
+            if (!product.depth || !product.undertone) return true;
+
             // Exact match on depth
             const depthMatch = product.depth === depth;
 
