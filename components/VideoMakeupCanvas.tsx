@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { applyMakeup, MakeupSettings, AccessoryCategory } from '@/lib/makeupRenderer';
 import { FacialLandmarks } from '@/lib/mediapipe-video';
 
@@ -20,18 +20,23 @@ export default function VideoMakeupCanvas({
     accessoryCategory = 'glasses'
 }: VideoMakeupCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const accessoryImgRef = useRef<HTMLImageElement | null>(null);
+    const [loadedAccessoryImage, setLoadedAccessoryImage] = useState<HTMLImageElement | null>(null);
 
     // Pre-load accessory image when it changes
     useEffect(() => {
         if (accessoryImage) {
             const img = new Image();
+            img.crossOrigin = 'anonymous'; // Ensure CORS compatibility
             img.src = accessoryImage;
             img.onload = () => {
-                accessoryImgRef.current = img;
+                setLoadedAccessoryImage(img);
+            };
+            img.onerror = (e) => {
+                console.error("Failed to load accessory image", e);
+                setLoadedAccessoryImage(null);
             };
         } else {
-            accessoryImgRef.current = null;
+            setLoadedAccessoryImage(null);
         }
     }, [accessoryImage]);
 
@@ -59,7 +64,7 @@ export default function VideoMakeupCanvas({
         applyMakeup(ctx, landmarks, {
             ...makeupSettings,
             accessory: {
-                image: accessoryImgRef.current,
+                image: loadedAccessoryImage,
                 opacity: 0.9,
                 category: accessoryCategory
             }
