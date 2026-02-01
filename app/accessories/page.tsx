@@ -4,6 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import WebcamCapture from '@/components/WebcamCapture';
 import VideoMakeupCanvas from '@/components/VideoMakeupCanvas';
 import { initializeFaceMeshVideo, processVideoFrame, FacialLandmarks } from '@/lib/mediapipe-video';
@@ -11,6 +12,7 @@ import { AccessoryCategory } from '@/lib/makeupRenderer';
 import { removeImageBackground, convertToPNG } from '@/lib/imageProcessor';
 
 export default function AccessoriesPage() {
+    const router = useRouter();
     const [isWebcamActive, setIsWebcamActive] = useState(true);
     const [landmarks, setLandmarks] = useState<FacialLandmarks | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -92,6 +94,11 @@ export default function AccessoriesPage() {
         setIsWebcamActive(false);
         setLandmarks(null);
         videoRef.current = null;
+        setUploadedImages([]);
+        setError(null);
+        setIsProcessing(false);
+        setProcessingStatus('');
+        router.push('/');
     };
 
     return (
@@ -173,6 +180,18 @@ export default function AccessoriesPage() {
                                         </p>
                                     </div>
 
+                                    <button
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="w-full glass-strong p-4 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all text-sm group"
+                                    >
+                                        <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                                            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                            </svg>
+                                        </div>
+                                        <span className="text-blue-400 font-semibold text-xs">Upload Accessory</span>
+                                    </button>
+
                                     {/* Accessory Placement */}
                                     <div className="space-y-3 p-4 glass rounded-xl border border-white/5">
                                         <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Placement</p>
@@ -189,22 +208,15 @@ export default function AccessoriesPage() {
                                                     {cat === 'generic' ? 'Center' :
                                                         cat === 'nose-left' ? 'Left Nose' :
                                                             cat === 'nose-right' ? 'Right Nose' :
-                                                                cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                                                cat === 'glasses' ? 'Eyes' :
+                                                                    cat === 'earrings' ? 'Ears' :
+                                                                        cat === 'hat' ? 'Head' :
+                                                                            (cat as string).charAt(0).toUpperCase() + (cat as string).slice(1)}
                                                 </button>
                                             ))}
                                         </div>
                                     </div>
-                                    <button
-                                        onClick={() => fileInputRef.current?.click()}
-                                        className="w-full glass-strong p-4 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all text-sm group"
-                                    >
-                                        <div className="w-8 h-8 bg-blue-500/10 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-                                            <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                            </svg>
-                                        </div>
-                                        <span className="text-blue-400 font-semibold text-xs">Upload Accessory</span>
-                                    </button>
+
                                 </div>
                                 <button
                                     onClick={handleStopWebcam}
