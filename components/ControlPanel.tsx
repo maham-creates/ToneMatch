@@ -73,14 +73,14 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Lipstick Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer flex-1">
+                    <label className="flex items-center gap-2 cursor-pointer">
                         <input
                             type="checkbox"
                             checked={makeupSettings.lipstick.enabled}
                             onChange={(e) => updateSetting('lipstick', 'enabled', e.target.checked)}
                             className="w-5 h-5 accent-purple-500"
                         />
-                        <span className="font-semibold text-lg">Lipstick</span>
+                        <span className="font-semibold text-lg min-w-[120px]">Lipstick</span>
                     </label>
                     <div className="flex items-center gap-3">
                         <HexColorInput
@@ -88,13 +88,15 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                             onChange={(val) => updateSetting('lipstick', 'color', val)}
                             disabled={!makeupSettings.lipstick.enabled}
                         />
-                        <input
-                            type="color"
-                            value={makeupSettings.lipstick.color}
-                            onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
-                            disabled={!makeupSettings.lipstick.enabled}
-                            className="cursor-pointer disabled:opacity-50"
-                        />
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-white/20 shrink-0">
+                            <input
+                                type="color"
+                                value={makeupSettings.lipstick.color}
+                                onChange={(e) => updateSetting('lipstick', 'color', e.target.value)}
+                                disabled={!makeupSettings.lipstick.enabled}
+                                className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] cursor-pointer disabled:opacity-50"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -111,7 +113,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         value={makeupSettings.lipstick.opacity}
                         onChange={(e) => updateSetting('lipstick', 'opacity', parseFloat(e.target.value))}
                         disabled={!makeupSettings.lipstick.enabled}
-                        className="disabled:opacity-50"
+                        className="disabled:opacity-50 w-full"
                     />
                 </div>
             </div>
@@ -121,14 +123,14 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Blush Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer flex-1">
+                    <label className="flex items-center gap-2 cursor-pointer">
                         <input
                             type="checkbox"
                             checked={makeupSettings.blush.enabled}
                             onChange={(e) => updateSetting('blush', 'enabled', e.target.checked)}
                             className="w-5 h-5 accent-purple-500"
                         />
-                        <span className="font-semibold text-lg">Blush</span>
+                        <span className="font-semibold text-lg min-w-[120px]">Blush</span>
                     </label>
                     <div className="flex items-center gap-3">
                         <HexColorInput
@@ -136,13 +138,15 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                             onChange={(val) => updateSetting('blush', 'color', val)}
                             disabled={!makeupSettings.blush.enabled}
                         />
-                        <input
-                            type="color"
-                            value={makeupSettings.blush.color}
-                            onChange={(e) => updateSetting('blush', 'color', e.target.value)}
-                            disabled={!makeupSettings.blush.enabled}
-                            className="cursor-pointer disabled:opacity-50"
-                        />
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-white/20 shrink-0">
+                            <input
+                                type="color"
+                                value={makeupSettings.blush.color}
+                                onChange={(e) => updateSetting('blush', 'color', e.target.value)}
+                                disabled={!makeupSettings.blush.enabled}
+                                className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] cursor-pointer disabled:opacity-50"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -159,7 +163,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         value={makeupSettings.blush.opacity}
                         onChange={(e) => updateSetting('blush', 'opacity', parseFloat(e.target.value))}
                         disabled={!makeupSettings.blush.enabled}
-                        className="disabled:opacity-50"
+                        className="disabled:opacity-50 w-full"
                     />
                 </div>
             </div>
@@ -169,14 +173,14 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Eyeshadow Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer flex-1">
+                    <label className="flex items-center gap-2 cursor-pointer">
                         <input
                             type="checkbox"
                             checked={makeupSettings.eyeshadow.enabled}
                             onChange={(e) => updateSetting('eyeshadow', 'enabled', e.target.checked)}
                             className="w-5 h-5 accent-purple-500"
                         />
-                        <span className="font-semibold text-lg">Eyeshadow</span>
+                        <span className="font-semibold text-lg min-w-[120px]">Eyeshadow</span>
                     </label>
                     <div className="flex items-center gap-3">
                         <HexColorInput
@@ -184,13 +188,15 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                             onChange={(val) => updateSetting('eyeshadow', 'color', val)}
                             disabled={!makeupSettings.eyeshadow.enabled}
                         />
-                        <input
-                            type="color"
-                            value={makeupSettings.eyeshadow.color}
-                            onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
-                            disabled={!makeupSettings.eyeshadow.enabled}
-                            className="cursor-pointer disabled:opacity-50"
-                        />
+                        <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-white/20 shrink-0">
+                            <input
+                                type="color"
+                                value={makeupSettings.eyeshadow.color}
+                                onChange={(e) => updateSetting('eyeshadow', 'color', e.target.value)}
+                                disabled={!makeupSettings.eyeshadow.enabled}
+                                className="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] cursor-pointer disabled:opacity-50"
+                            />
+                        </div>
                     </div>
                 </div>
 
@@ -207,7 +213,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
                         value={makeupSettings.eyeshadow.opacity}
                         onChange={(e) => updateSetting('eyeshadow', 'opacity', parseFloat(e.target.value))}
                         disabled={!makeupSettings.eyeshadow.enabled}
-                        className="disabled:opacity-50"
+                        className="disabled:opacity-50 w-full"
                     />
                 </div>
             </div>

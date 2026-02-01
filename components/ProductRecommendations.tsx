@@ -129,8 +129,8 @@ const ProductRecommendationsComponent = memo(({
 
             {/* Lipstick Recommendations */}
             <div>
-                <div className="flex justify-between items-center gap-2 mb-3 flex-nowrap">
-                    <h3 className="text-lg font-semibold flex items-center gap-2 truncate">
+                <div className="flex justify-between items-center gap-2 mb-3">
+                    <h3 className="text-lg font-semibold flex items-center gap-2 shrink-0">
                         <span className="text-pink-400">💄</span> Lipsticks
                     </h3>
                     {recommendations.lipsticks.length > PRODUCTS_PER_PAGE && (
@@ -138,7 +138,7 @@ const ProductRecommendationsComponent = memo(({
                             onClick={() => handleRefresh('lipstick')}
                             className="text-[10px] uppercase tracking-wider text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors whitespace-nowrap shrink-0"
                         >
-                            <span>Try more for you!</span>
+                            <span>try more!</span>
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
@@ -158,8 +158,8 @@ const ProductRecommendationsComponent = memo(({
 
             {/* Blush Recommendations */}
             <div>
-                <div className="flex justify-between items-center gap-2 mb-3 flex-nowrap">
-                    <h3 className="text-lg font-semibold flex items-center gap-2 truncate">
+                <div className="flex justify-between items-center gap-2 mb-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2 shrink-0">
                         <span className="text-rose-400">✨</span> Blushes
                     </h3>
                     {recommendations.blushes.length > PRODUCTS_PER_PAGE && (
@@ -167,7 +167,7 @@ const ProductRecommendationsComponent = memo(({
                             onClick={() => handleRefresh('blush')}
                             className="text-[10px] uppercase tracking-wider text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors whitespace-nowrap shrink-0"
                         >
-                            <span>Try more for you!</span>
+                            <span>try more!</span>
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
@@ -187,8 +187,8 @@ const ProductRecommendationsComponent = memo(({
 
             {/* Eyeshadow Recommendations */}
             <div>
-                <div className="flex justify-between items-center gap-2 mb-3 flex-nowrap">
-                    <h3 className="text-lg font-semibold flex items-center gap-2 truncate">
+                <div className="flex justify-between items-center gap-2 mb-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2 shrink-0">
                         <span className="text-purple-400">👁️</span> Eyeshadows
                     </h3>
                     {recommendations.eyeshadows.length > PRODUCTS_PER_PAGE && (
@@ -196,7 +196,7 @@ const ProductRecommendationsComponent = memo(({
                             onClick={() => handleRefresh('eyeshadow')}
                             className="text-[10px] uppercase tracking-wider text-purple-400 hover:text-purple-300 flex items-center gap-1 transition-colors whitespace-nowrap shrink-0"
                         >
-                            <span>Try more for you!</span>
+                            <span>try more!</span>
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
