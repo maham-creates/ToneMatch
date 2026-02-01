@@ -16,20 +16,51 @@ export default function AccessoriesPage() {
     const [error, setError] = useState<string | null>(null);
     const [uploadedImages, setUploadedImages] = useState<string[]>([]);
     const [accessoryCategory, setAccessoryCategory] = useState<AccessoryCategory>('glasses');
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [processingStatus, setProcessingStatus] = useState('');
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
-        if (file) {
+        if (!file) return;
+
+        try {
+            setIsProcessing(true);
+            setProcessingStatus('Preparing image...');
+            setError(null);
+
+            // Read file
             const reader = new FileReader();
-            reader.onload = (event) => {
-                const result = event.target?.result;
-                if (typeof result === 'string') {
-                    setUploadedImages((prev) => [result, ...prev]);
-                }
-            };
-            reader.readAsDataURL(file);
+            const imageData: string = await new Promise((resolve, reject) => {
+                reader.onload = (event) => resolve(event.target?.result as string);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+
+            // Pause face detection temporarily if needed to free up resources for AI
+            // In this version we rely on the single-threaded nature of JS to some extent, 
+            // but the background removal happens in a worker/async. 
+            // If performance is an issue, we could explicitly stop the loop here, 
+            // but let's try just processing first.
+            setProcessingStatus('Removing background...');
+
+            // Process the image: Remove background and ensure PNG format
+            const processedImage = await removeImageBackground(imageData);
+
+            setUploadedImages((prev) => [processedImage, ...prev]);
+            setAccessoryCategory('glasses'); // Default to glasses
+            setProcessingStatus('');
+        } catch (err: any) {
+            console.error('Processing failed:', err);
+            setError(`Failed to process image: ${err.message}. Please try again.`);
+        } finally {
+            setIsProcessing(false);
+            setProcessingStatus('');
+            // Reset input value to allow selecting the same file again if needed
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
         }
     };
 
