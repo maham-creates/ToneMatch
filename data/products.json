@@ -1,710 +1,528 @@
 {
     "lipsticks": [
         {
-            "id": "lip-1",
-            "brand": "Luxe Beauty",
-            "name": "Velvet Matte",
-            "shade": "Rose Petal",
-            "color": "#D4869C",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "lip_1",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Satin Hydrating Lipstick",
+            "shade": "03 Big Hit- nude",
+            "color": "#BF8A72",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564474&icid2=products%20grid:p501496:product"
         },
         {
-            "id": "lip-2",
-            "brand": "Luxe Beauty",
-            "name": "Velvet Matte",
-            "shade": "Coral Dream",
-            "color": "#E8927C",
-            "depth": "light",
-            "undertone": "warm"
-        },
-        {
-            "id": "lip-3",
-            "brand": "Glow Cosmetics",
-            "name": "Satin Finish",
-            "shade": "Berry Kiss",
-            "color": "#A8516E",
-            "depth": "medium",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-4",
-            "brand": "Glow Cosmetics",
-            "name": "Satin Finish",
-            "shade": "Terracotta",
-            "color": "#C67B5C",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "lip-5",
-            "brand": "Radiant Rouge",
-            "name": "Glossy Shine",
-            "shade": "Plum Perfection",
-            "color": "#6B3E5C",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-6",
-            "brand": "Radiant Rouge",
-            "name": "Glossy Shine",
-            "shade": "Brick Red",
-            "color": "#8B4234",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "lip-7",
-            "brand": "Pure Pout",
-            "name": "Cream Lipstick",
-            "shade": "Nude Blush",
-            "color": "#C9A0A0",
-            "depth": "light",
-            "undertone": "neutral"
-        },
-        {
-            "id": "lip-8",
-            "brand": "Pure Pout",
-            "name": "Cream Lipstick",
-            "shade": "Mauve Magic",
-            "color": "#9B6B7F",
-            "depth": "medium",
-            "undertone": "neutral"
-        },
-        {
-            "id": "lip-9",
-            "brand": "Chic Lips",
-            "name": "Liquid Matte",
-            "shade": "Wine Night",
-            "color": "#5C2E3E",
-            "depth": "deep",
-            "undertone": "neutral"
-        },
-        {
-            "id": "lip-10",
-            "brand": "Chic Lips",
-            "name": "Liquid Matte",
-            "shade": "Pink Champagne",
-            "color": "#E5B3C5",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-11",
-            "brand": "Velvet Touch",
-            "name": "Matte Stick",
-            "shade": "Soft Mauve",
-            "color": "#B48B91",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-12",
-            "brand": "Velvet Touch",
-            "name": "Matte Stick",
-            "shade": "Peach Fuzz",
-            "color": "#FFCBA4",
-            "depth": "light",
-            "undertone": "warm"
-        },
-        {
-            "id": "lip-13",
-            "brand": "Urban Glow",
-            "name": "Hydra Lip",
-            "shade": "Deep Cherry",
-            "color": "#7B1113",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-14",
-            "brand": "Urban Glow",
-            "name": "Hydra Lip",
-            "shade": "Spiced Amber",
-            "color": "#A0522D",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "lip-15",
-            "brand": "Silk Road",
-            "name": "Satin Lip",
-            "shade": "Desert Rose",
-            "color": "#B76E79",
-            "depth": "medium",
-            "undertone": "neutral"
-        },
-        {
-            "id": "lip-16",
-            "brand": "Vivid",
-            "name": "Neon Matte",
-            "shade": "Bubblegum",
-            "color": "#FF69B4",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "lip-17",
-            "brand": "Vivid",
-            "name": "Neon Matte",
-            "shade": "Sunset Orange",
+            "id": "lip_16",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Satin Hydrating Lipstick",
+            "shade": "orange red",
             "color": "#FF4500",
-            "depth": "medium",
-            "undertone": "warm"
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564540"
         },
         {
-            "id": "lip-18",
-            "brand": "Royal",
-            "name": "Luxury Silk",
-            "shade": "Deep Merlot",
-            "color": "#730000",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "lip_1_bold",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Satin Hydrating Lipstick",
+            "shade": "super bold-purple",
+            "color": "#78184A",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564573"
         },
         {
-            "id": "lip-19",
-            "brand": "Royal",
-            "name": "Luxury Silk",
-            "shade": "Golden Sand",
-            "color": "#C2B280",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "lip_17",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "09 Undisciplined",
+            "shade": "Amber Nude",
+            "color": "#B06C53",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564532"
         },
         {
-            "id": "lip-20",
-            "brand": "Velvet",
-            "name": "Matte",
-            "shade": "Dusty Rose",
-            "color": "#B57170",
-            "depth": "medium",
-            "undertone": "cool"
+            "id": "lip_5",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Never Ending",
+            "shade": "Beige Pink",
+            "color": "#C98C87",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564458"
         },
         {
-            "id": "lip-21",
-            "brand": "Glow",
-            "name": "Satin",
-            "shade": "Honey Peach",
-            "color": "#F4A460",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "lip_4",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "07 Push the limit",
+            "shade": "Pink Nude",
+            "color": "#C47C7B",
+            "price": 29.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564516"
         },
         {
-            "id": "lip-22",
-            "brand": "Luna",
-            "name": "Moonlight",
-            "shade": "Silver Pink",
-            "color": "#D8BFD8",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "lip_5_reuse",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Never Enough",
+            "shade": "Old Ruse",
+            "color": "#C48A7E",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564649"
         },
         {
-            "id": "lip-23",
-            "brand": "Solar",
-            "name": "Sunburst",
-            "shade": "Tangerine",
-            "color": "#FF8C00",
-            "depth": "medium",
-            "undertone": "warm"
+            "id": "lip_6",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Full Ignition",
+            "shade": "Soft Beige",
+            "color": "#D39B87",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564508"
+        },
+        {
+            "id": "lip_7",
+            "retailer": "Sephora",
+            "brand": "PAT McGRATH LABS",
+            "name": "MatteTrance™ Lipstick",
+            "shade": "Fatal Fuchsia",
+            "color": "#C2185B",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/pat-mcgrath-labs-mattetrance-lipstick-P461038"
+        },
+        {
+            "id": "lip_8",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "OneMoreRound",
+            "shade": "blushish pink",
+            "color": "#C16C7F",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564466"
+        },
+        {
+            "id": "lip_90",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Not too much",
+            "shade": "burgundy",
+            "color": "#8D273A",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564565"
+        },
+        {
+            "id": "lip_80",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Explosive Game",
+            "shade": "Fuchsia pink",
+            "color": "#D81B60",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564599"
+        },
+        {
+            "id": "lip_180",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Excessively Good",
+            "shade": "Red",
+            "color": "#B11226",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564557"
+        },
+        {
+            "id": "lip_170",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Stronger Than Ever",
+            "shade": "Brown",
+            "color": "#6D3B2C",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564524"
+        },
+        {
+            "id": "lip_50",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Extreme Power",
+            "shade": "Rosewood",
+            "color": "#9B4A4F",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564623"
+        },
+        {
+            "id": "lip_60",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Can't Stop",
+            "shade": "Coral Pink",
+            "color": "#F26A5A",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564490"
+        },
+        {
+            "id": "lip_40",
+            "retailer": "Sephora",
+            "brand": "Sephora",
+            "name": "Unconditional",
+            "shade": "Pink",
+            "color": "#FA8FB1",
+            "price": 16.00,
+            "url": "https://www.sephora.com/product/satin-hydrating-lipstick-P501496?skuId=2564490"
+        },
+        {
+            "id": "lip_201",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "light neutral pink",
+            "color": "#E7B7B7",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621403"
+        },
+        {
+            "id": "lip_202",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "intense orange brown",
+            "color": "#B4532A",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621403"
+        },
+        {
+            "id": "lip_203",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "midtone mauve pink",
+            "color": "#B06A7C",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621403"
+        },
+        {
+            "id": "lip_204",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "classic clean red",
+            "color": "#B11226",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621403"
+        },
+        {
+            "id": "lip_205",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "deep dark blue red",
+            "color": "#7A0C1F",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621414"
+        },
+        {
+            "id": "lip_206",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "midtone nudey pink",
+            "color": "#D39A8B",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621435"
+        },
+        {
+            "id": "lip_207",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "soft muted brownish pink",
+            "color": "#A46B63",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621522"
+        },
+        {
+            "id": "lip_208",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "peachy nude pink",
+            "color": "#E1A08A",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2644468"
+        },
+        {
+            "id": "lip_209",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "dirty warm nude",
+            "color": "#B07A5A",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621416"
+        },
+        {
+            "id": "lip_210",
+            "retailer": "Ulta",
+            "brand": "MAC",
+            "name": "M·A·Cximal Silky Matte Lipstick",
+            "shade": "midtone pink",
+            "color": "#C86A86",
+            "price": 25.00,
+            "url": "https://www.ulta.com/p/macximal-silky-matte-lipstick-pimprod2043558?sku=2621440"
         }
     ],
     "blushes": [
         {
-            "id": "blush-1",
-            "brand": "Radiance Co",
-            "name": "Powder Blush",
-            "shade": "Soft Pink",
-            "color": "#F5A9B8",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "blush_10",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Shame On You",
+            "color": "#E3A2A5",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496065"
         },
         {
-            "id": "blush-2",
-            "brand": "Radiance Co",
-            "name": "Powder Blush",
-            "shade": "Peachy Keen",
-            "color": "#FFAB91",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "blush_11",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Flirt It Up",
+            "color": "#C97A86",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496066"
         },
         {
-            "id": "blush-3",
-            "brand": "Glow Up",
-            "name": "Cream Blush",
-            "shade": "Rosy Glow",
-            "color": "#E57373",
-            "depth": "medium",
-            "undertone": "cool"
+            "id": "blush_12",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Second Chance",
+            "color": "#D88A6F",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496067"
         },
         {
-            "id": "blush-4",
-            "brand": "Glow Up",
-            "name": "Cream Blush",
-            "shade": "Warm Sunset",
-            "color": "#FF8A65",
-            "depth": "medium",
-            "undertone": "warm"
+            "id": "blush_13",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Love Sick",
+            "color": "#B95A63",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496068"
         },
         {
-            "id": "blush-5",
-            "brand": "Blush Beauty",
-            "name": "Liquid Blush",
-            "shade": "Deep Rose",
-            "color": "#C2185B",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "blush_14",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Over Excited",
+            "color": "#E18B7A",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496069"
         },
         {
-            "id": "blush-6",
-            "brand": "Blush Beauty",
-            "name": "Liquid Blush",
-            "shade": "Terracotta Glow",
-            "color": "#D84315",
-            "depth": "deep",
-            "undertone": "warm"
+            "id": "blush_15",
+            "retailer": "Sephora",
+            "brand": "SEPHORA COLLECTION",
+            "name": "Sephora Colorful Blush",
+            "shade": "Trust Yourself",
+            "color": "#A85C5A",
+            "price": 14.00,
+            "url": "https://www.sephora.com/product/sephora-colorful-blush-P433005?skuId=2496070"
         },
         {
-            "id": "blush-7",
-            "brand": "Petal Soft",
-            "name": "Silk Blush",
-            "shade": "Lavender Haze",
-            "color": "#E6E6FA",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "blush_u1",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Cute",
+            "color": "#F3BEC8",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         },
         {
-            "id": "blush-8",
-            "brand": "Petal Soft",
-            "name": "Silk Blush",
-            "shade": "Golden Hour",
-            "color": "#F4A460",
-            "depth": "medium",
-            "undertone": "warm"
+            "id": "blush_u2",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Playful",
+            "color": "#F5C1A3",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         },
         {
-            "id": "blush-9",
-            "brand": "Noir Beauty",
-            "name": "Deep Bloom",
-            "shade": "Plum Wine",
-            "color": "#5E2F3D",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "blush_u3",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Guilty",
+            "color": "#D7AFA6",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         },
         {
-            "id": "blush-10",
-            "brand": "Bloom",
-            "name": "Garden Blush",
-            "shade": "Wild Rose",
-            "color": "#FF007F",
-            "depth": "medium",
-            "undertone": "cool"
+            "id": "blush_u4",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Flirty",
+            "color": "#EE7CA8",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         },
         {
-            "id": "blush-11",
-            "brand": "Bloom",
-            "name": "Garden Blush",
-            "shade": "Apricot Sky",
-            "color": "#FBCEB1",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "blush_u5",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Hot",
+            "color": "#D96A4F",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         },
         {
-            "id": "blush-12",
-            "brand": "Earth",
-            "name": "Mica Blush",
-            "shade": "Burnt Sienna",
-            "color": "#E97451",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-13",
-            "brand": "Frost",
-            "name": "Icy Blush",
-            "shade": "Cool Pink",
-            "color": "#FFC0CB",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-14",
-            "brand": "Velvet",
-            "name": "Silk",
-            "shade": "Berry Pink",
-            "color": "#D05D82",
-            "depth": "medium",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-15",
-            "brand": "Solar",
-            "name": "Glow",
-            "shade": "Sun Kissed",
-            "color": "#FFA07A",
-            "depth": "light",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-16",
-            "brand": "Dusk",
-            "name": "Matte",
-            "shade": "Evening Mauve",
-            "color": "#8B475D",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-17",
-            "brand": "Coral",
-            "name": "Mist",
-            "shade": "Ocean Coral",
-            "color": "#FF7F50",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-18",
-            "brand": "Amber",
-            "name": "Glow",
-            "shade": "Canyon",
-            "color": "#D2691E",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-19",
-            "brand": "Ruby",
-            "name": "Stardust",
-            "shade": "Crimson",
-            "color": "#DC143C",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-20",
-            "brand": "L'Oreal Paris",
-            "name": "Pretty Baby Pink",
-            "shade": "Baby Pink",
-            "color": "#FFB7CE",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-21",
-            "brand": "Glossier",
-            "name": "Cloud Paint",
-            "shade": "Peach",
-            "color": "#FFE5B4",
-            "depth": "light",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-22",
-            "brand": "NARS",
-            "name": "Powder Blush",
-            "shade": "Plum",
-            "color": "#DDA0DD",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-23",
-            "brand": "Benefit",
-            "name": "Chachatint",
-            "shade": "Apricot",
-            "color": "#FBCEB1",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-24",
-            "brand": "Tarte",
-            "name": "Amazonian Clay",
-            "shade": "Mauve",
-            "color": "#E0B0FF",
-            "depth": "medium",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-25",
-            "brand": "Clinique",
-            "name": "Cheek Pop",
-            "shade": "Soft Berry",
-            "color": "#841617",
-            "depth": "medium",
-            "undertone": "cool"
-        },
-        {
-            "id": "blush-26",
-            "brand": "MAC",
-            "name": "Mineralize",
-            "shade": "Rose",
-            "color": "#E57373",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-27",
-            "brand": "Milani",
-            "name": "Baked Blush",
-            "shade": "Orangish",
-            "color": "#FF8A65",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-28",
-            "brand": "Fenty Beauty",
-            "name": "Cheeks Out",
-            "shade": "Pinkish Red",
-            "color": "#E91E63",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-29",
-            "brand": "Rare Beauty",
-            "name": "Soft Pinch",
-            "shade": "Peachy",
-            "color": "#FFAB91",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-30",
-            "brand": "Bobbi Brown",
-            "name": "Pot Rouge",
-            "shade": "Brownish",
-            "color": "#A52A2A",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-31",
-            "brand": "Tower 28",
-            "name": "BeachPlease",
-            "shade": "Tangerine",
-            "color": "#F28500",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-32",
-            "brand": "Hourglass",
-            "name": "Ambient Lighting",
-            "shade": "Brick",
-            "color": "#BC4A3C",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "blush-33",
-            "brand": "Pat McGrath",
-            "name": "Divine Blush",
-            "shade": "Raisin",
-            "color": "#240623",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "blush_u6",
+            "retailer": "Ulta",
+            "brand": "SACHEU",
+            "name": "Cheek STAY-N All-Day Liquid Blush",
+            "shade": "I'm Bold",
+            "color": "#C63B6E",
+            "price": 18.00,
+            "url": "https://www.ulta.com/p/cheek-stay-n-all-day-liquid-blush-pimprod2051545?sku=2640664"
         }
     ],
     "eyeshadows": [
         {
-            "id": "eye-1",
-            "brand": "Eye Artistry",
-            "name": "Shimmer Shadow",
-            "shade": "Champagne",
-            "color": "#E8D4B8",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "eye_105",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Twinkle Twinkle",
+            "color": "#D6B27C",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2820165"
         },
         {
-            "id": "eye-2",
-            "brand": "Eye Artistry",
-            "name": "Shimmer Shadow",
-            "shade": "Silver Frost",
-            "color": "#C0C0C0",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "eye_602",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Diamond Crush",
+            "color": "#DADADA",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2820157"
         },
         {
-            "id": "eye-3",
-            "brand": "Shadow Studio",
-            "name": "Matte Palette",
-            "shade": "Bronze",
-            "color": "#CD7F32",
-            "depth": "medium",
-            "undertone": "warm"
+            "id": "eye_212",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Flame",
+            "color": "#C66A2E",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2820140"
         },
         {
-            "id": "eye-4",
-            "brand": "Shadow Studio",
-            "name": "Matte Palette",
-            "shade": "Taupe",
-            "color": "#8B7D6B",
-            "depth": "medium",
-            "undertone": "cool"
+            "id": "eye_103",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "First Light",
+            "color": "#E9E2C9",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819563"
         },
         {
-            "id": "eye-5",
-            "brand": "Glam Eyes",
-            "name": "Metallic Finish",
-            "shade": "Deep Copper",
-            "color": "#B87333",
-            "depth": "deep",
-            "undertone": "warm"
+            "id": "eye_104",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Ballet Shoes",
+            "color": "#E2C7A3",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819662"
         },
         {
-            "id": "eye-6",
-            "brand": "Glam Eyes",
-            "name": "Metallic Finish",
-            "shade": "Smokey Plum",
-            "color": "#5D4157",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "eye_116",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Glitter Fever",
+            "color": "#F1C232",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819548"
         },
         {
-            "id": "eye-7",
-            "brand": "Starlight",
-            "name": "Dust Shadow",
-            "shade": "Midnight Blue",
-            "color": "#191970",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "eye_205",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Fool's Gold",
+            "color": "#C89B4A",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819431"
         },
         {
-            "id": "eye-8",
-            "brand": "Starlight",
-            "name": "Dust Shadow",
-            "shade": "Forest Green",
-            "color": "#228B22",
-            "depth": "medium",
-            "undertone": "warm"
+            "id": "eye_213",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Hollywood Calling",
+            "color": "#9A5A2E",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819720"
         },
         {
-            "id": "eye-9",
-            "brand": "Celestial",
-            "name": "Glow Shadow",
-            "shade": "Moonstone",
-            "color": "#7DF9FF",
-            "depth": "light",
-            "undertone": "cool"
+            "id": "eye_216",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Big Bang",
+            "color": "#B87A3B",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819530"
         },
         {
-            "id": "eye-10",
-            "brand": "Celestial",
-            "name": "Glow Shadow",
-            "shade": "Sun Flare",
-            "color": "#FFD700",
-            "depth": "light",
-            "undertone": "warm"
+            "id": "eye_217",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Chocolate Chip",
+            "color": "#5A3A2A",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819514"
         },
         {
-            "id": "eye-11",
-            "brand": "Oasis",
-            "name": "Velvet Shadow",
-            "shade": "Emerald",
-            "color": "#50C878",
-            "depth": "medium",
-            "undertone": "cool"
+            "id": "eye_307",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Let's Party",
+            "color": "#8B5A3C",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819514"
         },
         {
-            "id": "eye-12",
-            "brand": "Oasis",
-            "name": "Velvet Shadow",
-            "shade": "Ruby",
-            "color": "#E0115F",
-            "depth": "deep",
-            "undertone": "warm"
+            "id": "eye_308",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Smell Of Roses",
+            "color": "#9A6A73",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819357"
         },
         {
-            "id": "eye-13",
-            "brand": "Frost",
-            "name": "Icy Shadow",
-            "shade": "Blue Glaze",
-            "color": "#ADD8E6",
-            "depth": "light",
-            "undertone": "cool"
-        },
-        {
-            "id": "eye-14",
-            "brand": "Cosmic",
-            "name": "Dust",
-            "shade": "Galaxy Purple",
-            "color": "#4B0082",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "eye-15",
-            "brand": "Terra",
-            "name": "Matte",
-            "shade": "Clay Red",
-            "color": "#A52A2A",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "eye-16",
-            "brand": "Glint",
-            "name": "Sparkle",
-            "shade": "Rose Gold",
-            "color": "#B76E79",
-            "depth": "light",
-            "undertone": "warm"
-        },
-        {
-            "id": "eye-17",
-            "brand": "Nebula",
-            "name": "Shimmer",
-            "shade": "Starry Night",
-            "color": "#000080",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "eye-18",
-            "brand": "Eclipse",
-            "name": "Matte",
-            "shade": "Charcoal",
-            "color": "#36454F",
-            "depth": "deep",
-            "undertone": "cool"
-        },
-        {
-            "id": "eye-19",
-            "brand": "Forest",
-            "name": "Moss",
-            "shade": "Leaf Green",
-            "color": "#556B2F",
-            "depth": "medium",
-            "undertone": "cool"
-        },
-        {
-            "id": "eye-20",
-            "brand": "Sun",
-            "name": "Glow",
-            "shade": "Bright Gold",
-            "color": "#FFD700",
-            "depth": "deep",
-            "undertone": "warm"
-        },
-        {
-            "id": "eye-21",
-            "brand": "Desert",
-            "name": "Mirage",
-            "shade": "Sandstorm",
-            "color": "#EDC9AF",
-            "depth": "medium",
-            "undertone": "warm"
-        },
-        {
-            "id": "eye-22",
-            "brand": "Ocean",
-            "name": "Tide",
-            "shade": "Deep Teal",
-            "color": "#008080",
-            "depth": "deep",
-            "undertone": "cool"
+            "id": "eye_314",
+            "retailer": "Sephora",
+            "brand": "Sephora Collection",
+            "name": "Colorful Eyeshadow",
+            "shade": "Fantasia",
+            "color": "#9C7AAE",
+            "price": 8.00,
+            "url": "https://www.sephora.com/product/colorful-eyeshadow-P515026?skuId=2819480"
         }
     ]
 }
