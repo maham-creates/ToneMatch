@@ -8,14 +8,30 @@ interface VideoMakeupCanvasProps {
     videoElement: HTMLVideoElement | null;
     landmarks: FacialLandmarks | null;
     makeupSettings: MakeupSettings;
+    accessoryImage?: string | null;
 }
 
 export default function VideoMakeupCanvas({
     videoElement,
     landmarks,
-    makeupSettings
+    makeupSettings,
+    accessoryImage
 }: VideoMakeupCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const accessoryImgRef = useRef<HTMLImageElement | null>(null);
+
+    // Pre-load accessory image when it changes
+    useEffect(() => {
+        if (accessoryImage) {
+            const img = new Image();
+            img.src = accessoryImage;
+            img.onload = () => {
+                accessoryImgRef.current = img;
+            };
+        } else {
+            accessoryImgRef.current = null;
+        }
+    }, [accessoryImage]);
 
     useEffect(() => {
         if (!canvasRef.current || !videoElement || !landmarks) return;
@@ -38,7 +54,13 @@ export default function VideoMakeupCanvas({
         ctx.scale(-1, 1);
         ctx.translate(-canvas.width, 0);
 
-        applyMakeup(ctx, landmarks, makeupSettings);
+        applyMakeup(ctx, landmarks, {
+            ...makeupSettings,
+            accessory: {
+                image: accessoryImgRef.current,
+                opacity: 0.9
+            }
+        });
 
         ctx.restore();
     }, [videoElement, landmarks, makeupSettings]);

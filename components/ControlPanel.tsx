@@ -73,7 +73,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Lipstick Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.lipstick.enabled}
@@ -121,7 +121,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Blush Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.blush.enabled}
@@ -169,7 +169,7 @@ export default function ControlPanel({ makeupSettings, onSettingsChange }: Contr
             {/* Eyeshadow Controls */}
             <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                    <label className="flex items-center gap-2 cursor-pointer">
+                    <label className="flex items-center gap-2 cursor-pointer flex-1">
                         <input
                             type="checkbox"
                             checked={makeupSettings.eyeshadow.enabled}

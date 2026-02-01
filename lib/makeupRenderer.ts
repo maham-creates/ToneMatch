@@ -1,5 +1,7 @@
 // Canvas-based makeup rendering utilities
 
+import { FacialLandmarks } from '@/lib/mediapipe-video';
+
 export interface MakeupSettings {
     lipstick: {
         enabled: boolean;
@@ -14,6 +16,10 @@ export interface MakeupSettings {
     eyeshadow: {
         enabled: boolean;
         color: string;
+        opacity: number;
+    };
+    accessory?: {
+        image: HTMLImageElement | null;
         opacity: number;
     };
 }
@@ -197,9 +203,47 @@ export function renderEyeshadow(
 }
 
 /**
+ * Render an accessory image focused on the nose/eyes bridge area
+ */
+export function renderAccessory(
+    ctx: CanvasRenderingContext2D,
+    landmarks: { x: number; y: number }[],
+    image: HTMLImageElement,
+    opacity: number
+) {
+    if (landmarks.length < 264 || !image.complete) return;
+
+    // Use eye corners (indices 33 and 263) to determine center, scale, and rotation
+    const leftEye = landmarks[33];
+    const rightEye = landmarks[263];
+    const noseBridge = landmarks[168]; // Midpoint of eyebrows/nose bridge
+
+    const dx = rightEye.x - leftEye.x;
+    const dy = rightEye.y - leftEye.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx);
+
+    ctx.save();
+    ctx.globalAlpha = opacity;
+
+    // Position at the bridge of the nose
+    ctx.translate(noseBridge.x, noseBridge.y);
+    ctx.rotate(angle);
+
+    // Scale accessory based on eye distance (assuming average sunglasses width)
+    const scale = distance / (image.width * 0.5);
+    ctx.scale(scale, scale);
+
+    // Draw centered
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+
+    ctx.restore();
+}
+
+/**
  * Clear the canvas
  */
-export function clearCanvas(ctx: CanvasRenderingContext2D, width: number, height: number) {
+export function cleanupCanvas(ctx: CanvasRenderingContext2D, width: number, height: number) {
     ctx.clearRect(0, 0, width, height);
 }
 
@@ -208,19 +252,11 @@ export function clearCanvas(ctx: CanvasRenderingContext2D, width: number, height
  */
 export function applyMakeup(
     ctx: CanvasRenderingContext2D,
-    landmarks: {
-        lips: { x: number; y: number }[];
-        leftCheek: { x: number; y: number }[];
-        rightCheek: { x: number; y: number }[];
-        leftEye: { x: number; y: number }[];
-        rightEye: { x: number; y: number }[];
-        leftEyeshadow: { x: number; y: number }[];
-        rightEyeshadow: { x: number; y: number }[];
-    },
+    landmarks: FacialLandmarks,
     settings: MakeupSettings
 ) {
     // Clear previous makeup
-    clearCanvas(ctx, ctx.canvas.width, ctx.canvas.height);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     // Apply makeup in order (back to front)
     if (settings.blush.enabled) {
@@ -235,5 +271,9 @@ export function applyMakeup(
 
     if (settings.lipstick.enabled) {
         renderLipstick(ctx, landmarks.lips, settings.lipstick.color, settings.lipstick.opacity);
+    }
+
+    if (settings.accessory?.image && settings.accessory.image.complete) {
+        renderAccessory(ctx, landmarks.allLandmarks, settings.accessory.image, settings.accessory.opacity);
     }
 }
