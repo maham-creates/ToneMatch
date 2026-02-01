@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { applyMakeup, MakeupSettings } from '@/lib/makeupRenderer';
+import { applyMakeup, MakeupSettings, AccessoryCategory } from '@/lib/makeupRenderer';
 import { FacialLandmarks } from '@/lib/mediapipe-video';
 
 interface VideoMakeupCanvasProps {
@@ -9,13 +9,15 @@ interface VideoMakeupCanvasProps {
     landmarks: FacialLandmarks | null;
     makeupSettings: MakeupSettings;
     accessoryImage?: string | null;
+    accessoryCategory?: AccessoryCategory;
 }
 
 export default function VideoMakeupCanvas({
     videoElement,
     landmarks,
     makeupSettings,
-    accessoryImage
+    accessoryImage,
+    accessoryCategory = 'glasses'
 }: VideoMakeupCanvasProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const accessoryImgRef = useRef<HTMLImageElement | null>(null);
@@ -58,12 +60,13 @@ export default function VideoMakeupCanvas({
             ...makeupSettings,
             accessory: {
                 image: accessoryImgRef.current,
-                opacity: 0.9
+                opacity: 0.9,
+                category: accessoryCategory
             }
         });
 
         ctx.restore();
-    }, [videoElement, landmarks, makeupSettings]);
+    }, [videoElement, landmarks, makeupSettings, accessoryCategory]);
 
     return (
         <canvas

@@ -7,12 +7,15 @@ import Link from 'next/link';
 import WebcamCapture from '@/components/WebcamCapture';
 import VideoMakeupCanvas from '@/components/VideoMakeupCanvas';
 import { initializeFaceMeshVideo, processVideoFrame, FacialLandmarks } from '@/lib/mediapipe-video';
+import { AccessoryCategory } from '@/lib/makeupRenderer';
+import { removeImageBackground, convertToPNG } from '@/lib/imageProcessor';
 
 export default function AccessoriesPage() {
     const [isWebcamActive, setIsWebcamActive] = useState(true);
     const [landmarks, setLandmarks] = useState<FacialLandmarks | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [uploadedImages, setUploadedImages] = useState<string[]>([]);
+    const [accessoryCategory, setAccessoryCategory] = useState<AccessoryCategory>('glasses');
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -136,6 +139,25 @@ export default function AccessoriesPage() {
                                             {landmarks ? '✨ Tracking active' : '🔍 Looking for face...'}
                                         </p>
                                     </div>
+
+                                    {/* Accessory Placement */}
+                                    <div className="space-y-3 p-4 glass rounded-xl border border-white/5">
+                                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-1">Placement</p>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            {(['glasses', 'earrings', 'hat', 'generic'] as const).map((cat) => (
+                                                <button
+                                                    key={cat}
+                                                    onClick={() => setAccessoryCategory(cat)}
+                                                    className={`py-2 px-1 rounded-lg text-[10px] font-bold transition-all border ${accessoryCategory === cat
+                                                        ? 'bg-blue-500/20 border-blue-500/50 text-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.1)]'
+                                                        : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
+                                                        }`}
+                                                >
+                                                    {cat === 'generic' ? 'Center' : cat.charAt(0).toUpperCase() + cat.slice(1)}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
                                         className="w-full glass-strong p-4 flex flex-col items-center justify-center text-center group border-2 border-dashed border-white/10 hover:border-blue-500/50 hover:bg-white/5 transition-all text-sm group"
@@ -168,6 +190,7 @@ export default function AccessoriesPage() {
                                         eyeshadow: { enabled: false, color: '', opacity: 0 },
                                     }}
                                     accessoryImage={uploadedImages[0]}
+                                    accessoryCategory={accessoryCategory}
                                 />
                                 {!landmarks && (
                                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 glass px-4 py-2 rounded-lg z-20">
