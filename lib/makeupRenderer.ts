@@ -2,6 +2,8 @@
 
 import { FacialLandmarks } from '@/lib/mediapipe-video';
 
+export type AccessoryCategory = 'glasses' | 'earrings' | 'hat' | 'generic';
+
 export interface MakeupSettings {
     lipstick: {
         enabled: boolean;
@@ -21,6 +23,7 @@ export interface MakeupSettings {
     accessory?: {
         image: HTMLImageElement | null;
         opacity: number;
+        category?: AccessoryCategory;
     };
 }
 
@@ -208,39 +211,73 @@ export function renderEyeshadow(
 }
 
 /**
- * Render an accessory image focused on the nose/eyes bridge area
+ * Render an accessory image focused on specific facial regions
  */
 export function renderAccessory(
     ctx: CanvasRenderingContext2D,
     landmarks: { x: number; y: number }[],
     image: HTMLImageElement,
-    opacity: number
+    opacity: number,
+    category: 'glasses' | 'earrings' | 'hat' | 'generic' = 'generic'
 ) {
-    if (landmarks.length < 264 || !image.complete) return;
-
-    // Use eye corners (indices 33 and 263) to determine center, scale, and rotation
-    const leftEye = landmarks[33];
-    const rightEye = landmarks[263];
-    const noseBridge = landmarks[168]; // Midpoint of eyebrows/nose bridge
-
-    const dx = rightEye.x - leftEye.x;
-    const dy = rightEye.y - leftEye.y;
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const angle = Math.atan2(dy, dx);
+    if (landmarks.length < 468 || !image.complete) return;
 
     ctx.save();
     ctx.globalAlpha = opacity;
 
-    // Position at the bridge of the nose
-    ctx.translate(noseBridge.x, noseBridge.y);
-    ctx.rotate(angle);
+    if (category === 'glasses' || category === 'generic') {
+        // Use eye corners (indices 33 and 263) and nose bridge (168)
+        const leftEye = landmarks[33];
+        const rightEye = landmarks[263];
+        const noseBridge = landmarks[168];
 
-    // Scale accessory based on eye distance (assuming average sunglasses width)
-    const scale = distance / (image.width * 0.5);
-    ctx.scale(scale, scale);
+        const dx = rightEye.x - leftEye.x;
+        const dy = rightEye.y - leftEye.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
 
-    // Draw centered
-    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+        ctx.translate(noseBridge.x, noseBridge.y);
+        ctx.rotate(angle);
+        const scale = distance / (image.width * 0.5);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, -image.height / 2);
+    } else if (category === 'earrings') {
+        // Render on both ear lobes (indices 132 and 361)
+        const leftLobe = landmarks[132];
+        const rightLobe = landmarks[361];
+        const faceWidth = Math.abs(landmarks[454].x - landmarks[234].x);
+        const scale = (faceWidth / image.width) * 0.15; // Small scale for earrings
+
+        // Left earring
+        ctx.save();
+        ctx.translate(leftLobe.x, leftLobe.y);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, 0); // Hang from the lobe
+        ctx.restore();
+
+        // Right earring
+        ctx.save();
+        ctx.translate(rightLobe.x, rightLobe.y);
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, 0);
+        ctx.restore();
+    } else if (category === 'hat') {
+        // Render on top of head (index 10 is crown/top center)
+        const topCenter = landmarks[10];
+        const leftTemple = landmarks[127];
+        const rightTemple = landmarks[356];
+
+        const dx = rightTemple.x - leftTemple.x;
+        const dy = rightTemple.y - leftTemple.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+
+        ctx.translate(topCenter.x, topCenter.y);
+        ctx.rotate(angle);
+        const scale = (distance / image.width) * 1.5; // Hats should be wider than face
+        ctx.scale(scale, scale);
+        ctx.drawImage(image, -image.width / 2, -image.height * 0.8); // Offset upward to sit ON head
+    }
 
     ctx.restore();
 }
@@ -279,6 +316,12 @@ export function applyMakeup(
     }
 
     if (settings.accessory?.image && settings.accessory.image.complete) {
-        renderAccessory(ctx, landmarks.allLandmarks, settings.accessory.image, settings.accessory.opacity);
+        renderAccessory(
+            ctx,
+            landmarks.allLandmarks,
+            settings.accessory.image,
+            settings.accessory.opacity,
+            settings.accessory.category
+        );
     }
 }
