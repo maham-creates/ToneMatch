@@ -2,6 +2,7 @@
 
 export interface FacialLandmarks {
     lips: { x: number; y: number }[];
+    innerLips: { x: number; y: number }[];
     leftCheek: { x: number; y: number }[];
     rightCheek: { x: number; y: number }[];
     leftEye: { x: number; y: number }[];
@@ -12,10 +13,8 @@ export interface FacialLandmarks {
 }
 
 // Landmark indices for different facial regions
-const LIPS_INDICES = [
-    61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95,
-    185, 40, 39, 37, 0, 267, 269, 270, 409, 415, 310, 311, 312, 13, 82, 81, 80, 191, 78
-];
+const LIPS_OUTER_INDICES = [61, 146, 91, 181, 84, 17, 314, 405, 321, 375, 291, 409, 270, 269, 267, 0, 37, 39, 40, 185];
+const LIPS_INNER_INDICES = [78, 191, 80, 81, 82, 13, 312, 311, 310, 415, 308, 324, 318, 402, 317, 14, 87, 178, 88, 95];
 
 const LEFT_CHEEK_INDICES = [116, 123, 147, 213, 192, 214, 212, 202, 203];
 const RIGHT_CHEEK_INDICES = [345, 352, 376, 433, 416, 434, 432, 422, 423];
@@ -86,6 +85,7 @@ function smoothLandmarks(current: FacialLandmarks, previous: FacialLandmarks | n
 
     return {
         lips: smoothPoints(current.lips, previous.lips),
+        innerLips: smoothPoints(current.innerLips, previous.innerLips),
         leftCheek: smoothPoints(current.leftCheek, previous.leftCheek),
         rightCheek: smoothPoints(current.rightCheek, previous.rightCheek),
         leftEye: smoothPoints(current.leftEye, previous.leftEye),
@@ -152,7 +152,8 @@ export async function initializeFaceMeshVideo(
                 };
 
                 const rawLandmarks: FacialLandmarks = {
-                    lips: convertLandmarks(LIPS_INDICES),
+                    lips: convertLandmarks(LIPS_OUTER_INDICES),
+                    innerLips: convertLandmarks(LIPS_INNER_INDICES),
                     leftCheek: convertLandmarks(LEFT_CHEEK_INDICES),
                     rightCheek: convertLandmarks(RIGHT_CHEEK_INDICES),
                     leftEye: convertLandmarks(LEFT_EYE_INDICES),

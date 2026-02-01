@@ -32,48 +32,44 @@ export interface MakeupSettings {
  */
 export function renderLipstick(
     ctx: CanvasRenderingContext2D,
-    lipLandmarks: { x: number; y: number }[],
+    outerLipLandmarks: { x: number; y: number }[],
+    innerLipLandmarks: { x: number; y: number }[],
     color: string,
     opacity: number
 ) {
-    if (lipLandmarks.length === 0) return;
+    if (outerLipLandmarks.length === 0) return;
 
     ctx.save();
     ctx.globalAlpha = opacity;
     ctx.fillStyle = color;
 
-    // Create a path from lip landmarks
+    // Create a path with a hole using the even-odd fill rule
     ctx.beginPath();
-    ctx.moveTo(lipLandmarks[0].x, lipLandmarks[0].y);
 
-    for (let i = 1; i < lipLandmarks.length; i++) {
-        ctx.lineTo(lipLandmarks[i].x, lipLandmarks[i].y);
+    // Outer lips
+    ctx.moveTo(outerLipLandmarks[0].x, outerLipLandmarks[0].y);
+    for (let i = 1; i < outerLipLandmarks.length; i++) {
+        ctx.lineTo(outerLipLandmarks[i].x, outerLipLandmarks[i].y);
     }
-
     ctx.closePath();
 
-    // Use shadowBlur for soft feathering
+    // Inner lips (as a hole if possible)
+    if (innerLipLandmarks.length > 0) {
+        ctx.moveTo(innerLipLandmarks[0].x, innerLipLandmarks[0].y);
+        for (let i = 1; i < innerLipLandmarks.length; i++) {
+            ctx.lineTo(innerLipLandmarks[i].x, innerLipLandmarks[i].y);
+        }
+        ctx.closePath();
+    }
+
+    // Use fill rule 'evenodd' to create the hole
+    ctx.fill('evenodd');
+
+    // Add soft feathering
     ctx.shadowColor = color;
     ctx.shadowBlur = 4;
-    ctx.fill();
-
-    // Add a second pass with low opacity for extra softness
-    ctx.globalAlpha = opacity * 0.3;
+    ctx.globalAlpha = opacity * 0.5;
     ctx.stroke();
-
-    // Add a subtle gradient for depth
-    const centerX = lipLandmarks.reduce((sum, p) => sum + p.x, 0) / lipLandmarks.length;
-    const centerY = lipLandmarks.reduce((sum, p) => sum + p.y, 0) / lipLandmarks.length;
-    const radius = Math.max(
-        ...lipLandmarks.map(p => Math.sqrt((p.x - centerX) ** 2 + (p.y - centerY) ** 2))
-    );
-
-    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0.1)');
-    gradient.addColorStop(1, 'rgba(0, 0, 0, 0.1)');
-
-    ctx.fillStyle = gradient;
-    ctx.fill();
 
     ctx.restore();
 }
@@ -308,7 +304,7 @@ export function applyMakeup(
     }
 
     if (settings.lipstick.enabled) {
-        renderLipstick(ctx, landmarks.lips, settings.lipstick.color, settings.lipstick.opacity);
+        renderLipstick(ctx, landmarks.lips, landmarks.innerLips, settings.lipstick.color, settings.lipstick.opacity);
     }
 
     if (settings.accessory?.image && settings.accessory.image.complete) {
