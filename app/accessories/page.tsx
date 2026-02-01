@@ -43,10 +43,12 @@ export default function AccessoriesPage() {
             // but the background removal happens in a worker/async. 
             // If performance is an issue, we could explicitly stop the loop here, 
             // but let's try just processing first.
-            setProcessingStatus('Removing background...');
+            setProcessingStatus('Starting background removal...');
 
             // Process the image: Remove background and ensure PNG format
-            const processedImage = await removeImageBackground(imageData);
+            const processedImage = await removeImageBackground(imageData, (status) => {
+                setProcessingStatus(status);
+            });
 
             setUploadedImages((prev) => [processedImage, ...prev]);
             setAccessoryCategory('glasses'); // Default to glasses
@@ -226,6 +228,12 @@ export default function AccessoriesPage() {
                                 {!landmarks && (
                                     <div className="absolute top-4 left-1/2 transform -translate-x-1/2 glass px-4 py-2 rounded-lg z-20">
                                         <p className="text-sm text-yellow-300">Looking for face...</p>
+                                    </div>
+                                )}
+                                {isProcessing && (
+                                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-30 flex flex-col items-center justify-center animate-fade-in">
+                                        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                                        <p className="text-white font-medium text-lg">{processingStatus}</p>
                                     </div>
                                 )}
                             </div>
