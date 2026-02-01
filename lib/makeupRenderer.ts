@@ -48,7 +48,15 @@ export function renderLipstick(
     }
 
     ctx.closePath();
+
+    // Use shadowBlur for soft feathering
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 4;
     ctx.fill();
+
+    // Add a second pass with low opacity for extra softness
+    ctx.globalAlpha = opacity * 0.3;
+    ctx.stroke();
 
     // Add a subtle gradient for depth
     const centerX = lipLandmarks.reduce((sum, p) => sum + p.x, 0) / lipLandmarks.length;
@@ -132,34 +140,16 @@ export function renderBlush(
     ctx.fillStyle = gradient;
 
     // Draw main elliptical blush shape
+    ctx.filter = 'blur(12px)'; // Large blur for natural transition
     ctx.beginPath();
     ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
-    // Layer 2: Add defined stroke for edge definition
-    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.4)')}`;
-    ctx.lineWidth = 1.5;
+    // Layer 2: Add defined center core
+    ctx.filter = 'blur(6px)';
+    ctx.globalAlpha = opacity * 0.4;
     ctx.beginPath();
-    ctx.ellipse(0, 0, radiusX, radiusY, -0.35, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Layer 3: Add secondary arc for contouring (sweep effect)
-    ctx.strokeStyle = `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.35)')}`;
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.arc(radiusX * 0.3, -radiusY * 0.15, radiusX * 0.7, 0.5, Math.PI * 1.4);
-    ctx.stroke();
-
-    // Layer 4: Add highlight arc for natural depth
-    const highlightGradient = ctx.createLinearGradient(-radiusX * 0.5, -radiusY * 0.3, radiusX * 0.5, radiusY * 0.3);
-    highlightGradient.addColorStop(0, `${rgbColor.replace('rgb', 'rgba').replace(')', ', 0.2)')}`);
-    highlightGradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.1)');
-    highlightGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-
-    ctx.fillStyle = highlightGradient;
-    ctx.beginPath();
-    ctx.ellipse(0, -radiusY * 0.2, radiusX * 0.8, radiusY * 0.5, -0.3, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, radiusX * 0.6, radiusY * 0.6, -0.35, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.restore();
@@ -190,6 +180,11 @@ export function renderEyeshadow(
 
     ctx.closePath();
     ctx.fillStyle = color;
+
+    // Soft feathering for eyeshadow
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 8;
+    ctx.filter = 'blur(2px)';
     ctx.fill();
 
     // Add gradient for depth
@@ -270,8 +265,8 @@ export function applyMakeup(
     }
 
     if (settings.eyeshadow.enabled) {
-        renderEyeshadow(ctx, landmarks.leftEye, settings.eyeshadow.color, settings.eyeshadow.opacity);
-        renderEyeshadow(ctx, landmarks.rightEye, settings.eyeshadow.color, settings.eyeshadow.opacity);
+        renderEyeshadow(ctx, landmarks.leftEyeshadow, settings.eyeshadow.color, settings.eyeshadow.opacity);
+        renderEyeshadow(ctx, landmarks.rightEyeshadow, settings.eyeshadow.color, settings.eyeshadow.opacity);
     }
 
     if (settings.lipstick.enabled) {

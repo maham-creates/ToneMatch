@@ -69,7 +69,7 @@ export default function MakeupPage() {
         processVideoFrame(video);
     }, []);
 
-    const handleProductClick = (
+    const handleProductClick = useCallback((
         product: Product,
         category: 'lipstick' | 'blush' | 'eyeshadow'
     ) => {
@@ -79,15 +79,15 @@ export default function MakeupPage() {
             eyeshadow: 0.6
         };
 
-        setMakeupSettings({
-            ...makeupSettings,
+        setMakeupSettings(prev => ({
+            ...prev,
             [category]: {
                 enabled: true,
                 color: product.color,
                 opacity: defaultOpacities[category],
             },
-        });
-    };
+        }));
+    }, []);
 
     const handleStartWebcam = () => {
         setIsWebcamActive(true);
