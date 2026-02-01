@@ -2,7 +2,41 @@
 
 import { SkinToneResult } from '@/lib/skinTone';
 import { Product, ProductRecommendations } from '@/lib/productMatcher';
-import { MakeupSettings } from '@/lib/makeupRenderer';
+import { memo } from 'react';
+
+interface ProductCardProps {
+    product: Product;
+    category: 'lipstick' | 'blush' | 'eyeshadow';
+    onClick: (product: Product, category: 'lipstick' | 'blush' | 'eyeshadow') => void;
+}
+
+const ProductCard = memo(({
+    product,
+    category,
+    onClick,
+}: ProductCardProps) => (
+    <button
+        onClick={() => onClick(product, category)}
+        className="glass p-4 text-left hover:bg-white/10 transition-all group w-full"
+    >
+        <div className="flex items-center gap-3">
+            <div
+                className="w-12 h-12 rounded-lg border-2 border-white/20 group-hover:scale-110 transition-transform"
+                style={{ backgroundColor: product.color }}
+            ></div>
+            <div className="flex-1 min-w-0">
+                <p className="font-semibold text-sm truncate">{product.brand}</p>
+                <p className="text-xs text-gray-400 truncate">{product.name}</p>
+                <div className="flex justify-between items-center mt-1">
+                    <p className="text-xs text-purple-300 truncate">{product.shade}</p>
+                    <code className="text-[10px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">{product.color.toUpperCase()}</code>
+                </div>
+            </div>
+        </div>
+    </button>
+));
+
+ProductCard.displayName = 'ProductCard';
 
 interface ProductRecommendationsProps {
     skinTone: SkinToneResult | null;
@@ -11,12 +45,12 @@ interface ProductRecommendationsProps {
     isDetecting?: boolean;
 }
 
-export default function ProductRecommendationsComponent({
+const ProductRecommendationsComponent = memo(({
     skinTone,
     recommendations,
     onProductClick,
     isDetecting = false,
-}: ProductRecommendationsProps) {
+}: ProductRecommendationsProps) => {
     if (!skinTone || !recommendations) {
         return (
             <div className="glass-strong p-6">
@@ -25,33 +59,6 @@ export default function ProductRecommendationsComponent({
         );
     }
 
-    const ProductCard = ({
-        product,
-        category,
-    }: {
-        product: Product;
-        category: 'lipstick' | 'blush' | 'eyeshadow';
-    }) => (
-        <button
-            onClick={() => onProductClick(product, category)}
-            className="glass p-4 text-left hover:bg-white/10 transition-all group w-full"
-        >
-            <div className="flex items-center gap-3">
-                <div
-                    className="w-12 h-12 rounded-lg border-2 border-white/20 group-hover:scale-110 transition-transform"
-                    style={{ backgroundColor: product.color }}
-                ></div>
-                <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-sm truncate">{product.brand}</p>
-                    <p className="text-xs text-gray-400 truncate">{product.name}</p>
-                    <div className="flex justify-between items-center mt-1">
-                        <p className="text-xs text-purple-300 truncate">{product.shade}</p>
-                        <code className="text-[10px] text-gray-400 bg-white/5 px-1.5 py-0.5 rounded">{product.color.toUpperCase()}</code>
-                    </div>
-                </div>
-            </div>
-        </button>
-    );
 
     return (
         <div className={`glass-strong p-6 space-y-6 max-h-[800px] overflow-y-auto ${skinTone ? 'animate-slide-in-right' : ''}`}>
@@ -90,7 +97,7 @@ export default function ProductRecommendationsComponent({
                 <div className="space-y-2">
                     {recommendations.lipsticks.length > 0 ? (
                         recommendations.lipsticks.map((product) => (
-                            <ProductCard key={product.id} product={product} category="lipstick" />
+                            <ProductCard key={product.id} product={product} category="lipstick" onClick={onProductClick} />
                         ))
                     ) : (
                         <p className="text-gray-500 text-sm">No matches found</p>
@@ -106,7 +113,7 @@ export default function ProductRecommendationsComponent({
                 <div className="space-y-2">
                     {recommendations.blushes.length > 0 ? (
                         recommendations.blushes.map((product) => (
-                            <ProductCard key={product.id} product={product} category="blush" />
+                            <ProductCard key={product.id} product={product} category="blush" onClick={onProductClick} />
                         ))
                     ) : (
                         <p className="text-gray-500 text-sm">No matches found</p>
@@ -122,7 +129,7 @@ export default function ProductRecommendationsComponent({
                 <div className="space-y-2">
                     {recommendations.eyeshadows.length > 0 ? (
                         recommendations.eyeshadows.map((product) => (
-                            <ProductCard key={product.id} product={product} category="eyeshadow" />
+                            <ProductCard key={product.id} product={product} category="eyeshadow" onClick={onProductClick} />
                         ))
                     ) : (
                         <p className="text-gray-500 text-sm">No matches found</p>
@@ -131,4 +138,7 @@ export default function ProductRecommendationsComponent({
             </div>
         </div>
     );
-}
+});
+ProductRecommendationsComponent.displayName = 'ProductRecommendationsComponent';
+
+export default ProductRecommendationsComponent;
