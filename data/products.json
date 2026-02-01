@@ -379,6 +379,132 @@
             "color": "#DC143C",
             "depth": "deep",
             "undertone": "warm"
+        },
+        {
+            "id": "blush-20",
+            "brand": "L'Oreal Paris",
+            "name": "Pretty Baby Pink",
+            "shade": "Baby Pink",
+            "color": "#FFB7CE",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-21",
+            "brand": "Glossier",
+            "name": "Cloud Paint",
+            "shade": "Peach",
+            "color": "#FFE5B4",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-22",
+            "brand": "NARS",
+            "name": "Powder Blush",
+            "shade": "Plum",
+            "color": "#DDA0DD",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-23",
+            "brand": "Benefit",
+            "name": "Chachatint",
+            "shade": "Apricot",
+            "color": "#FBCEB1",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-24",
+            "brand": "Tarte",
+            "name": "Amazonian Clay",
+            "shade": "Mauve",
+            "color": "#E0B0FF",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-25",
+            "brand": "Clinique",
+            "name": "Cheek Pop",
+            "shade": "Soft Berry",
+            "color": "#841617",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-26",
+            "brand": "MAC",
+            "name": "Mineralize",
+            "shade": "Rose",
+            "color": "#E57373",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-27",
+            "brand": "Milani",
+            "name": "Baked Blush",
+            "shade": "Orangish",
+            "color": "#FF8A65",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-28",
+            "brand": "Fenty Beauty",
+            "name": "Cheeks Out",
+            "shade": "Pinkish Red",
+            "color": "#E91E63",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-29",
+            "brand": "Rare Beauty",
+            "name": "Soft Pinch",
+            "shade": "Peachy",
+            "color": "#FFAB91",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-30",
+            "brand": "Bobbi Brown",
+            "name": "Pot Rouge",
+            "shade": "Brownish",
+            "color": "#A52A2A",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-31",
+            "brand": "Tower 28",
+            "name": "BeachPlease",
+            "shade": "Tangerine",
+            "color": "#F28500",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-32",
+            "brand": "Hourglass",
+            "name": "Ambient Lighting",
+            "shade": "Brick",
+            "color": "#BC4A3C",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-33",
+            "brand": "Pat McGrath",
+            "name": "Divine Blush",
+            "shade": "Raisin",
+            "color": "#240623",
+            "depth": "deep",
+            "undertone": "cool"
         }
     ],
     "eyeshadows": [
