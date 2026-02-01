@@ -2,7 +2,7 @@
 
 import { FacialLandmarks } from '@/lib/mediapipe-video';
 
-export type AccessoryCategory = 'glasses' | 'earrings' | 'hat' | 'generic';
+export type AccessoryCategory = 'glasses' | 'earrings' | 'hat' | 'nose-left' | 'nose-right' | 'generic';
 
 export interface MakeupSettings {
     lipstick: {
@@ -210,7 +210,7 @@ export function renderAccessory(
     landmarks: { x: number; y: number }[],
     image: HTMLImageElement,
     opacity: number,
-    category: 'glasses' | 'earrings' | 'hat' | 'generic' = 'generic'
+    category: AccessoryCategory = 'generic'
 ) {
     if (landmarks.length < 468 || !image.complete) return;
 
@@ -269,9 +269,39 @@ export function renderAccessory(
         const scale = (distance / image.width) * 1.5; // Hats should be wider than face
         ctx.scale(scale, scale);
         ctx.drawImage(image, -image.width / 2, -image.height * 0.8); // Offset upward to sit ON head
+    } else if (category === 'nose-left') {
+        renderNoseAccessory(ctx, landmarks, image, 279, 49);
+    } else if (category === 'nose-right') {
+        renderNoseAccessory(ctx, landmarks, image, 49, 279);
     }
 
     ctx.restore();
+}
+
+function renderNoseAccessory(
+    ctx: CanvasRenderingContext2D,
+    landmarks: { x: number; y: number }[],
+    image: HTMLImageElement,
+    targetIndex: number,
+    referenceIndex: number
+) {
+    const nosePoint = landmarks[targetIndex];
+
+    // Calculate scale based on face width or nose width
+    // We use the distance between nostrils (indices 279 and 49) 
+    // to determine a relative scale for the jewelry
+    const p1 = landmarks[279]; // Left nostril
+    const p2 = landmarks[49];  // Right nostril
+    const noseWidth = Math.sqrt(
+        Math.pow(p1.x - p2.x, 2) +
+        Math.pow(p1.y - p2.y, 2)
+    );
+
+    ctx.translate(nosePoint.x, nosePoint.y);
+    // Scale to be relatively small compared to nose width
+    const scale = noseWidth / image.width * 0.5;
+    ctx.scale(scale, scale);
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
 }
 
 /**
