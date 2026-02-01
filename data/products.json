@@ -89,6 +89,123 @@
             "color": "#E5B3C5",
             "depth": "light",
             "undertone": "cool"
+        },
+        {
+            "id": "lip-11",
+            "brand": "Velvet Touch",
+            "name": "Matte Stick",
+            "shade": "Soft Mauve",
+            "color": "#B48B91",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-12",
+            "brand": "Velvet Touch",
+            "name": "Matte Stick",
+            "shade": "Peach Fuzz",
+            "color": "#FFCBA4",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-13",
+            "brand": "Urban Glow",
+            "name": "Hydra Lip",
+            "shade": "Deep Cherry",
+            "color": "#7B1113",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-14",
+            "brand": "Urban Glow",
+            "name": "Hydra Lip",
+            "shade": "Spiced Amber",
+            "color": "#A0522D",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-15",
+            "brand": "Silk Road",
+            "name": "Satin Lip",
+            "shade": "Desert Rose",
+            "color": "#B76E79",
+            "depth": "medium",
+            "undertone": "neutral"
+        },
+        {
+            "id": "lip-16",
+            "brand": "Vivid",
+            "name": "Neon Matte",
+            "shade": "Bubblegum",
+            "color": "#FF69B4",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-17",
+            "brand": "Vivid",
+            "name": "Neon Matte",
+            "shade": "Sunset Orange",
+            "color": "#FF4500",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-18",
+            "brand": "Royal",
+            "name": "Luxury Silk",
+            "shade": "Deep Merlot",
+            "color": "#730000",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-19",
+            "brand": "Royal",
+            "name": "Luxury Silk",
+            "shade": "Golden Sand",
+            "color": "#C2B280",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-20",
+            "brand": "Velvet",
+            "name": "Matte",
+            "shade": "Dusty Rose",
+            "color": "#B57170",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-21",
+            "brand": "Glow",
+            "name": "Satin",
+            "shade": "Honey Peach",
+            "color": "#F4A460",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "lip-22",
+            "brand": "Luna",
+            "name": "Moonlight",
+            "shade": "Silver Pink",
+            "color": "#D8BFD8",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "lip-23",
+            "brand": "Solar",
+            "name": "Sunburst",
+            "shade": "Tangerine",
+            "color": "#FF8C00",
+            "depth": "medium",
+            "undertone": "warm"
         }
     ],
     "blushes": [
@@ -145,6 +262,123 @@
             "color": "#D84315",
             "depth": "deep",
             "undertone": "warm"
+        },
+        {
+            "id": "blush-7",
+            "brand": "Petal Soft",
+            "name": "Silk Blush",
+            "shade": "Lavender Haze",
+            "color": "#E6E6FA",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-8",
+            "brand": "Petal Soft",
+            "name": "Silk Blush",
+            "shade": "Golden Hour",
+            "color": "#F4A460",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-9",
+            "brand": "Noir Beauty",
+            "name": "Deep Bloom",
+            "shade": "Plum Wine",
+            "color": "#5E2F3D",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-10",
+            "brand": "Bloom",
+            "name": "Garden Blush",
+            "shade": "Wild Rose",
+            "color": "#FF007F",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-11",
+            "brand": "Bloom",
+            "name": "Garden Blush",
+            "shade": "Apricot Sky",
+            "color": "#FBCEB1",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-12",
+            "brand": "Earth",
+            "name": "Mica Blush",
+            "shade": "Burnt Sienna",
+            "color": "#E97451",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-13",
+            "brand": "Frost",
+            "name": "Icy Blush",
+            "shade": "Cool Pink",
+            "color": "#FFC0CB",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-14",
+            "brand": "Velvet",
+            "name": "Silk",
+            "shade": "Berry Pink",
+            "color": "#D05D82",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-15",
+            "brand": "Solar",
+            "name": "Glow",
+            "shade": "Sun Kissed",
+            "color": "#FFA07A",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-16",
+            "brand": "Dusk",
+            "name": "Matte",
+            "shade": "Evening Mauve",
+            "color": "#8B475D",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "blush-17",
+            "brand": "Coral",
+            "name": "Mist",
+            "shade": "Ocean Coral",
+            "color": "#FF7F50",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-18",
+            "brand": "Amber",
+            "name": "Glow",
+            "shade": "Canyon",
+            "color": "#D2691E",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "blush-19",
+            "brand": "Ruby",
+            "name": "Stardust",
+            "shade": "Crimson",
+            "color": "#DC143C",
+            "depth": "deep",
+            "undertone": "warm"
         }
     ],
     "eyeshadows": [
@@ -199,6 +433,150 @@
             "name": "Metallic Finish",
             "shade": "Smokey Plum",
             "color": "#5D4157",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-7",
+            "brand": "Starlight",
+            "name": "Dust Shadow",
+            "shade": "Midnight Blue",
+            "color": "#191970",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-8",
+            "brand": "Starlight",
+            "name": "Dust Shadow",
+            "shade": "Forest Green",
+            "color": "#228B22",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-9",
+            "brand": "Celestial",
+            "name": "Glow Shadow",
+            "shade": "Moonstone",
+            "color": "#7DF9FF",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-10",
+            "brand": "Celestial",
+            "name": "Glow Shadow",
+            "shade": "Sun Flare",
+            "color": "#FFD700",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-11",
+            "brand": "Oasis",
+            "name": "Velvet Shadow",
+            "shade": "Emerald",
+            "color": "#50C878",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-12",
+            "brand": "Oasis",
+            "name": "Velvet Shadow",
+            "shade": "Ruby",
+            "color": "#E0115F",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-13",
+            "brand": "Frost",
+            "name": "Icy Shadow",
+            "shade": "Blue Glaze",
+            "color": "#ADD8E6",
+            "depth": "light",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-14",
+            "brand": "Cosmic",
+            "name": "Dust",
+            "shade": "Galaxy Purple",
+            "color": "#4B0082",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-15",
+            "brand": "Terra",
+            "name": "Matte",
+            "shade": "Clay Red",
+            "color": "#A52A2A",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-16",
+            "brand": "Glint",
+            "name": "Sparkle",
+            "shade": "Rose Gold",
+            "color": "#B76E79",
+            "depth": "light",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-17",
+            "brand": "Nebula",
+            "name": "Shimmer",
+            "shade": "Starry Night",
+            "color": "#000080",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-18",
+            "brand": "Eclipse",
+            "name": "Matte",
+            "shade": "Charcoal",
+            "color": "#36454F",
+            "depth": "deep",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-19",
+            "brand": "Forest",
+            "name": "Moss",
+            "shade": "Leaf Green",
+            "color": "#556B2F",
+            "depth": "medium",
+            "undertone": "cool"
+        },
+        {
+            "id": "eye-20",
+            "brand": "Sun",
+            "name": "Glow",
+            "shade": "Bright Gold",
+            "color": "#FFD700",
+            "depth": "deep",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-21",
+            "brand": "Desert",
+            "name": "Mirage",
+            "shade": "Sandstorm",
+            "color": "#EDC9AF",
+            "depth": "medium",
+            "undertone": "warm"
+        },
+        {
+            "id": "eye-22",
+            "brand": "Ocean",
+            "name": "Tide",
+            "shade": "Deep Teal",
+            "color": "#008080",
             "depth": "deep",
             "undertone": "cool"
         }

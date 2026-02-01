@@ -6,6 +6,8 @@ export interface FacialLandmarks {
     rightCheek: { x: number; y: number }[];
     leftEye: { x: number; y: number }[];
     rightEye: { x: number; y: number }[];
+    leftEyeshadow: { x: number; y: number }[];
+    rightEyeshadow: { x: number; y: number }[];
     allLandmarks: { x: number; y: number }[];
 }
 
@@ -25,9 +27,21 @@ const RIGHT_EYE_INDICES = [
     362, 382, 381, 380, 374, 373, 390, 249, 263, 466, 388, 387, 386, 385, 384, 398
 ];
 
+const LEFT_EYESHADOW_INDICES = [
+    33, 161, 160, 159, 158, 157, 173, 133, 243, 190, 56, 28, 27, 29, 30, 247, 130
+];
+
+const RIGHT_EYESHADOW_INDICES = [
+    362, 398, 384, 385, 386, 387, 388, 466, 263, 463, 414, 286, 258, 257, 259, 260, 467, 359
+];
+
 let faceMeshInstance: any = null;
 let isProcessing = false;
 let scriptsLoaded = false;
+
+// Temporal smoothing state
+let previousLandmarks: FacialLandmarks | null = null;
+const SMOOTHING_FACTOR = 0.45; // Lower = smoother but more lag, Higher = more responsive but more jitter
 
 /**
  * Load MediaPipe scripts from CDN
@@ -53,6 +67,33 @@ async function loadMediaPipeScripts(): Promise<void> {
 
         document.head.appendChild(script);
     });
+}
+
+/**
+ * Apply temporal smoothing to landmarks
+ */
+function smoothLandmarks(current: FacialLandmarks, previous: FacialLandmarks | null): FacialLandmarks {
+    if (!previous) return current;
+
+    const smoothPoint = (curr: { x: number; y: number }, prev: { x: number; y: number }) => ({
+        x: prev.x + SMOOTHING_FACTOR * (curr.x - prev.x),
+        y: prev.y + SMOOTHING_FACTOR * (curr.y - prev.y),
+    });
+
+    const smoothPoints = (currArr: { x: number; y: number }[], prevArr: { x: number; y: number }[]) => {
+        return currArr.map((p, i) => smoothPoint(p, prevArr[i] || p));
+    };
+
+    return {
+        lips: smoothPoints(current.lips, previous.lips),
+        leftCheek: smoothPoints(current.leftCheek, previous.leftCheek),
+        rightCheek: smoothPoints(current.rightCheek, previous.rightCheek),
+        leftEye: smoothPoints(current.leftEye, previous.leftEye),
+        rightEye: smoothPoints(current.rightEye, previous.rightEye),
+        leftEyeshadow: smoothPoints(current.leftEyeshadow, previous.leftEyeshadow),
+        rightEyeshadow: smoothPoints(current.rightEyeshadow, previous.rightEyeshadow),
+        allLandmarks: smoothPoints(current.allLandmarks, previous.allLandmarks),
+    };
 }
 
 /**
@@ -110,20 +151,26 @@ export async function initializeFaceMeshVideo(
                     }));
                 };
 
-                const facialLandmarks: FacialLandmarks = {
+                const rawLandmarks: FacialLandmarks = {
                     lips: convertLandmarks(LIPS_INDICES),
                     leftCheek: convertLandmarks(LEFT_CHEEK_INDICES),
                     rightCheek: convertLandmarks(RIGHT_CHEEK_INDICES),
                     leftEye: convertLandmarks(LEFT_EYE_INDICES),
                     rightEye: convertLandmarks(RIGHT_EYE_INDICES),
+                    leftEyeshadow: convertLandmarks(LEFT_EYESHADOW_INDICES),
+                    rightEyeshadow: convertLandmarks(RIGHT_EYESHADOW_INDICES),
                     allLandmarks: landmarks.map((lm: any) => ({
                         x: lm.x * width,
                         y: lm.y * height,
                     })),
                 };
 
-                onResults(facialLandmarks);
+                const smoothedLandmarks = smoothLandmarks(rawLandmarks, previousLandmarks);
+                previousLandmarks = smoothedLandmarks;
+
+                onResults(smoothedLandmarks);
             } else {
+                previousLandmarks = null;
                 onResults(null);
             }
             isProcessing = false;
